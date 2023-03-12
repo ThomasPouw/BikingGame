@@ -1,0 +1,16 @@
+{
+    "LanguageName": "Simple Dutch",
+    "dictionary": [{
+        "DictionaryType": "Generic",
+        "TranslationDictionary": [
+            {
+                "originalLine": "Oke",
+                "translatedLine": "Ok"
+            },
+            {
+                "originalLine": "Deny",
+                "translatedLine": "Liever niet"
+            }
+        ]
+    }]
+}
