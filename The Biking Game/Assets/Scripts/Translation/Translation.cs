@@ -20,10 +20,6 @@ public class Translation : MonoBehaviour
     public void ImportLanguage(string JSONLanguage)
     {
         Language ImportLanguage = JsonUtility.FromJson<Language>(JSONLanguage);
-        Debug.Log(JsonUtility.ToJson(ImportLanguage));
-        Debug.Log(ImportLanguage);
-        Debug.Log(ImportLanguage.LanguageName);
-        Debug.Log(ImportLanguage.LanguageName);
         //Database stuff!
     }
     public void EditLanguage(string JSONLanguage, string LanguageName)

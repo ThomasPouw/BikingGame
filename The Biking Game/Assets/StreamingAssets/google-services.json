@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1033314706731",
+    "project_id": "bikinggame-3cabe",
+    "storage_bucket": "bikinggame-3cabe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033314706731:android:c29d53a6f8fb2ed0f3516e",
+        "android_client_info": {
+          "package_name": "com.PIT.BikingGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033314706731-dovh3nkdn8lvp5lb5qifpbrnl2v0k7a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-P7EfwodxaQp9JTeLGbyjKYAN5EWiVCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033314706731-dovh3nkdn8lvp5lb5qifpbrnl2v0k7a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1",
+  "databaseURL": "https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/"
+}
