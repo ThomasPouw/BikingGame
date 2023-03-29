@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class VehiclePath : MonoBehaviour
 {
-    [SerializeField] public vehicle PathforVehicle;
+    [SerializeField] public VehicleType vehicleType;
     [SerializeField] private int AmountofWayPoints;
-    [SerializeField] private GameObject SubWayPoint;
     [SerializeField] public List<GameObject> Waypoints;
+    [SerializeField] private bool _getsQuestion;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class VehiclePath : MonoBehaviour
 
     private void OnDrawGizmos() {
         if(Waypoints.Count == 0 || Waypoints.Count != AmountofWayPoints+2){
+            Waypoints = new List<GameObject>();
             if(transform.childCount != 2){
                 Debug.LogError("This path does not have enough Waypoints!");
                 return;
@@ -32,13 +33,16 @@ public class VehiclePath : MonoBehaviour
             Vector3 DistanceBetweenPoints = (Point1 - Point2)/(AmountofWayPoints+1);
             Waypoints.Add(transform.GetChild(0).gameObject);
             for(int i = 0; i < AmountofWayPoints; i++){
-                var SP = Instantiate(SubWayPoint, Point1 - (DistanceBetweenPoints* (i+1)), new Quaternion());
+                GameObject SP = new GameObject("SubWaypoint");
+                SP.transform.position = Point1 - (DistanceBetweenPoints* (i+1));
                 SP.transform.parent = transform;
                 if(i == AmountofWayPoints-1){
-                    SP.AddComponent<QuestionController>();
-                    SphereCollider SC =SP.AddComponent<SphereCollider>();
-                    SC.isTrigger = true;
-                    SC.radius = 0.75f;
+                    if(_getsQuestion){
+                        SP.AddComponent<QuestionController>();
+                        SphereCollider SC =SP.AddComponent<SphereCollider>();
+                        SC.isTrigger = true;
+                        SC.radius = 0.75f;
+                    }
                 }
                 Waypoints.Add(SP);
             }
@@ -53,15 +57,14 @@ public class VehiclePath : MonoBehaviour
                 Gizmos.DrawLine(Waypoints[i].transform.position, Waypoints[i-1].transform.position);
             }
             if(i == Waypoints.Count -2){
-                Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(Waypoints[i].transform.position, 0.75f);
+                if(_getsQuestion)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(Waypoints[i].transform.position, 0.75f);
+                }
             }
         }
     }
 }
-public enum vehicle{
-    Bike,
-    Car,
-    Tram,
-    Padestrian
-}
+
+

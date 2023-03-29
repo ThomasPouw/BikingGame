@@ -4,17 +4,22 @@ using UnityEngine;
 using Firebase.Storage;
 using Firebase.Extensions;
 using UnityEngine.UI;
+using System;
 
 public class ImageStorage : MonoBehaviour
 {
+    public static Dictionary<string, byte[]> Images;
     FirebaseStorage storage;
     StorageReference storageRef;
     // Start is called before the first frame update
     void Start()
     {
+        if(Images == null){
+            Images = new Dictionary<string, byte[]>();
+        }
         storage = FirebaseStorage.DefaultInstance;
         storageRef = storage.GetReferenceFromUrl("gs://bikinggame-3cabe.appspot.com");
-        DownloadPictures(new string[1]{"CV_Foto.jpg"});
+        //DownloadPicture("CV_Foto.jpg");
     }
 
     // Update is called once per frame
@@ -25,23 +30,39 @@ public class ImageStorage : MonoBehaviour
     public void UploadPicture(string file){
         //Maybe?
     }
-    public void DownloadPictures(string[] imageNames){
-        foreach (string imageName in imageNames)
-        {
+    public void DownloadPicture(string imageName, Image image){
+        try{
+            Texture2D texture = new Texture2D(50, 50);
+        if(Images.ContainsKey(imageName)){
+            texture.LoadImage(Images[imageName]);
+            image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+        }
+        else{
             StorageReference pathReference = storage.GetReference("images/"+ imageName);
-            //StorageReference httpsReference = storage.GetReferenceFromUrl("https://firebasestorage.googleapis.com/b/bucket/o/images%20"+ imageName);
-            string localUrl = "file:///Resources/images/"+ imageName;
-            pathReference.GetFileAsync(localUrl).ContinueWithOnMainThread(task => {
-                if(!task.IsFaulted && !task.IsCanceled){
-                    Debug.Log("File DownLoaded");
+            const long maxAllowedSize = 1 * 1024 * 1024;
+            pathReference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
+                if (task.IsFaulted || task.IsCanceled) 
+                {
+                    Debug.LogException(task.Exception);
+                    return;
+                    // Uh-oh, an error occurred!
                 }
-                else{
-                    Debug.LogError(task.Status);
+                else {
+                    Debug.Log(task.Result);
+                    Debug.Log("DownloadPicture: "+imageName);
+                    Images.Add(imageName, task.Result);
+                    Debug.Log("Finished downloading!");
+                    texture.LoadImage(Images[imageName]);
+                    
+                    image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+                    //image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+                    //texture.Apply();
                 }
             });
         }
-    }
-    public Image LoadPictureFromLocal(string ImageName){
-       return Resources.Load<Image>("images/"+ ImageName);
+        }
+        catch(Exception E){
+            Debug.LogError(E);
+        }
     }
 }

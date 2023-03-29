@@ -1,0 +1,31 @@
+{
+  "LanguageName": "Simple Dutch",
+  "dictionary": [
+    {
+      "DictionaryType": "Answer",
+      "TranslationDictionary": [
+        {
+          "originalLine": "Ja",
+          "translatedLine": "Yes"
+        },
+        {
+          "originalLine": "Nee",
+          "translatedLine": "No"
+        },
+        {
+          "originalLine": "Misschien",
+          "translatedLine": "Maybe?"
+        }
+      ]
+    },
+    {
+      "DictionaryType": "Question",
+      "TranslationDictionary": [
+        {
+          "originalLine": "Werkt dit?",
+          "translatedLine": "Will this work?"
+        }
+      ]
+    }
+  ]
+}

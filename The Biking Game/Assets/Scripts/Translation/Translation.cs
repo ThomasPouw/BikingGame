@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Translation : MonoBehaviour
+public class Translation
 {
-    public static Language currentLanguage;
-    public string jsonTest;
+    public TextAsset jsonTest;
     // Start is called before the first frame update
     void Start()
     {
-        ImportLanguage(jsonTest);
+        
     }
 
     // Update is called once per frame
@@ -17,37 +16,26 @@ public class Translation : MonoBehaviour
     {
         
     }
-    public void ImportLanguage(string JSONLanguage)
+    public void ImportLanguage(TextAsset JSONLanguage)
     {
-        Language ImportLanguage = JsonUtility.FromJson<Language>(JSONLanguage);
-        //Database stuff!
+        new TranslationStorage().writeNewTranslation(JSONLanguage.text, JSONLanguage.name);
     }
-    public void EditLanguage(string JSONLanguage, string LanguageName)
-    {
-        Language ImportLanguage = JsonUtility.FromJson<Language>(JSONLanguage);
-        //Database stuff!
-    }
-    public void DeleteLanguage(string languageName)
+    /*public void DeleteLanguage(string languageName)
     {
         if(currentLanguage.LanguageName == languageName){
             //Give error to prevent no language selected.
         }
         //Language ImportLanguage = JsonUtility.FromJson<Language>(JSONLanguage);
         //Database stuff!
-    }
-    public Language ReadLanguage(string languageName){
-        if(currentLanguage.LanguageName == languageName){
-            return currentLanguage;
-        }
-        return null;
-    }
-    public string[] ReadLanguageOptions(){
-        return null;
+    }*/
+    public Entry TranslateSentence(string sentence, string dictionaryType){
+        return TranslationStorage.CurrentLanguage[dictionaryType][sentence];
     }
 }
 [System.Serializable]
 public class Language
 {
+    
     public string LanguageName;
     public LanguageDictionary[] dictionary;
 }
