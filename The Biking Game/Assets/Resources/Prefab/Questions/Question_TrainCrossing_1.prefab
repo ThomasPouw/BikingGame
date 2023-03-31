@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6227117446003216069}
   - component: {fileID: 3552266650736589887}
+  - component: {fileID: -5044025035907111077}
   m_Layer: 0
   m_Name: Question_TrainCrossing_1
   m_TagString: Untagged
@@ -68,6 +69,19 @@ MonoBehaviour:
   vehicles: []
   Train: {fileID: 7632052622543240082}
   TrainBarriers: {fileID: 0}
+--- !u!114 &-5044025035907111077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2659169166582225780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 0
 --- !u!1 &7632052622543240082
 GameObject:
   m_ObjectHideFlags: 0

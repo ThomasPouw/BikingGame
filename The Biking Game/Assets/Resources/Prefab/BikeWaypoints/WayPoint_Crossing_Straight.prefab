@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 636397760760577947}
   - component: {fileID: 5150909408448103526}
+  - component: {fileID: 6655108893321465527}
   m_Layer: 0
   m_Name: WayPoint_Crossing_Straight
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Transform:
   - {fileID: 1527141122676727586}
   - {fileID: 1049908035215592563}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5150909408448103526
 MonoBehaviour:
@@ -116,6 +117,19 @@ MonoBehaviour:
   - {fileID: 6513623804834629720}
   - {fileID: 610449956319328543}
   _getsQuestion: 1
+--- !u!114 &6655108893321465527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333915910794945946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 0
 --- !u!1 &6513623804834629720
 GameObject:
   m_ObjectHideFlags: 0

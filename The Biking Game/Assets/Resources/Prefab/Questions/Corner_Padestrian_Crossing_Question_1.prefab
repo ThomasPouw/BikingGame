@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4422522102914649165}
   - component: {fileID: -8643322845016692471}
+  - component: {fileID: 3906689030835813713}
   m_Layer: 0
   m_Name: Corner_Padestrian_Crossing_Question_1
   m_TagString: Untagged
@@ -73,6 +74,19 @@ MonoBehaviour:
     HelperImages: []
     IsCorrect: 1
   vehicles: []
+--- !u!114 &3906689030835813713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6723076724109831941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 0
 --- !u!1001 &259567379879237827
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 65a9230a3b8e1414c81ccc5f196392ef
+guid: 984db996dafee0040aa38291346a7292
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BaseGray
-    second: {fileID: 2100000, guid: c0a6e6619afe7204697a748f1f3796fd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 81badf4e665638f4db6c907874d81bf1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: 5209ec7123d35b543882688b2c6a4b05, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TrainDoors
-    second: {fileID: 2100000, guid: 9a174710c92fa7e48a0933ea42f921b2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TrainWheel
-    second: {fileID: 2100000, guid: 24d99be42cac4e64b87279f57f08d671, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TrainWindow
-    second: {fileID: 2100000, guid: e33bbd45804770445a84febe587dc3a9, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -62,12 +32,12 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
