@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Entry
@@ -13,6 +14,7 @@ public class Entry
 [System.Serializable]
 public class Question
 {
+    [SerializeField] public Guid EntryID;
     [SerializeField] public string OriginalLine;
     [SerializeField] public Entry Entry;
 }

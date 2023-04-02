@@ -244,6 +244,7 @@ PlayerSettings:
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
+  useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 1
   AndroidTargetDevices: 0
@@ -725,7 +726,22 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    EmbeddedLinux: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    GameCoreScarlett: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    GameCoreXboxOne: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    LinuxHeadlessSimulation: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    Nintendo Switch: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    PS4: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    PS5: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    QNX: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    Stadia: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    Standalone: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    WebGL: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    Windows Store Apps: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    XboxOne: MK_TOON_OUTLINE_FADING_EXPONENTIAL
+    tvOS: MK_TOON_OUTLINE_FADING_EXPONENTIAL
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
