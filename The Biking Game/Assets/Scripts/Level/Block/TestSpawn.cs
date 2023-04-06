@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestSpawn : MonoBehaviour
 {
     [SerializeField] JsonBlockInfo jsonBlockInfo;
-    [SerializeField] BlockInfo blockInfo;
+    [SerializeField] LevelSize levelSize;
     [SerializeField] bool Activate = false;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class TestSpawn : MonoBehaviour
     }
     private void OnDrawGizmos() {
         if(Activate){
-            //blockInfo.setBlockInfo(jsonBlockInfo);
+            levelSize.MakeBlock(jsonBlockInfo, 1, 1);
             Activate = false;
         }
     }

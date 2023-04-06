@@ -10,6 +10,10 @@ public class Entry
     [SerializeField] public string TranslatedLine;
     [SerializeField] public string[] HelperImages;
     [SerializeField] public bool IsCorrect;
+    public void SetValue(string translationLine, string[] helperImages){
+        TranslatedLine = translationLine;
+        HelperImages =helperImages;
+    }
 }
 [System.Serializable]
 public class Question

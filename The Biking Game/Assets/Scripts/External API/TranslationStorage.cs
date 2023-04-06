@@ -89,12 +89,15 @@ public class TranslationStorage : MonoBehaviour
       CurrentLanguageName = currentListLanguage.LanguageName;
       try{
         foreach(LanguageDictionary LD in currentListLanguage.dictionary){
+          //Debug.Log(LD);
           //CurrentLanguage.Add(LD.DictionaryType, new Dictionary<string, Entry>());
           foreach(Entry E in LD.TranslationDictionary){
+              //Debug.Log(E.OriginalLine);
               _translationDictionary.Add(E.OriginalLine, E);
               //if(E.HelperImages.Length != 0)
               //_imageStorage.DownloadPicture(E.HelperImages);
           }
+          //Debug.Log(LD.DictionaryType);
           CurrentLanguage.Add(LD.DictionaryType, _translationDictionary);
           _translationDictionary = new Dictionary<string, Entry>();
 

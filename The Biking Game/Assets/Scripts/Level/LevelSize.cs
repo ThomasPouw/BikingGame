@@ -15,20 +15,28 @@ public class LevelSize : MonoBehaviour
     public List<JsonBlockInfo> alreadyPlacedTilesJSON = new List<JsonBlockInfo>();
     //public List<BlockInfo> alreadyPlacedTiles = new List<BlockInfo>();
     public NavMeshSurface surfaces;
+
+    [Header("Testing Blocks")]
+    public bool testBlock;
     
     // Start is called before the first frame update
     void Start()
     {
-        surfaces.BuildNavMesh();
+        
     }
-
-    private void OnEnable() {
+    private void Awake() {
+        if(testBlock){
+            surfaces.BuildNavMesh();
+        }
         levelStorage = GameObject.Find("Storage").GetComponent<LevelStorage>();
         JSONLevelSize jSONLevelSize = levelStorage.ReadLevel(StaticMachine.menuInfo.levelName);
         SetValue(jSONLevelSize);
     }
+    private void OnEnable() {
+        
+    }
     private void OnDrawGizmos() {
-        if(tiles.Count != xMax*yMax)
+        /*if(tiles.Count != xMax*yMax)
         {
             foreach (BlockInfo t in tiles)
             {
@@ -65,7 +73,7 @@ public class LevelSize : MonoBehaviour
                     tiles.Add(blockInfo);
                 }
             }
-        }
+        }*/
     }
     public void SetValue(JSONLevelSize jsonLevelSize)
     {
@@ -80,14 +88,14 @@ public class LevelSize : MonoBehaviour
         tile.name = jsonBlockInfo.tileName;
         GameObject _wayPoints = null;
         GameObject _baseQuestion = null;
-        if(jsonBlockInfo.baseQuestionName != null){
+        if(jsonBlockInfo.baseQuestionName != ""){
             _baseQuestion = (GameObject)Instantiate(Resources.Load("Prefab/Questions/"+ jsonBlockInfo.baseQuestionName), tile.transform.Find("Question"));
             _baseQuestion.name = jsonBlockInfo.baseQuestionName;
             _baseQuestion.transform.parent = tile.transform.Find("Question").transform;
             _baseQuestion.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.questionRotation);
         }
-        if(jsonBlockInfo.wayPointName != null){
-            _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/BikeWayPoints/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
+        if(jsonBlockInfo.wayPointName != ""){
+            _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/BikeWaypoints/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
             _wayPoints.name = jsonBlockInfo.wayPointName;
             _wayPoints.transform.parent = tile.transform.Find("Waypoint").transform;
             _wayPoints.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.wayPointRotation);
@@ -125,5 +133,6 @@ public class LevelSize : MonoBehaviour
                 }
             }
         }
+        surfaces.BuildNavMesh();
     }
 }

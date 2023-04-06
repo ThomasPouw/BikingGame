@@ -35,7 +35,7 @@ public class VehicleMovement : MonoBehaviour
                     }
                     Debug.Log(vehiclePath);
                 }
-            _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
+                _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
         }
         if(_navMeshAgent.remainingDistance <= 1){
             if(vehiclePath.Waypoints.Count == WayPointCount-1){

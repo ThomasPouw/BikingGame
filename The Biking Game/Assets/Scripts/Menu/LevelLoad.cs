@@ -12,6 +12,7 @@ public class LevelLoad : MonoBehaviour
         StaticMachine.menuInfo.SetValue(menuInfo);
         SceneManager.LoadScene("Level");
     }
+
     // Start is called before the first frame update
     void Start()
     {

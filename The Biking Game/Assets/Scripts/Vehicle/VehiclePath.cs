@@ -36,7 +36,7 @@ public class VehiclePath : MonoBehaviour
                 GameObject SP = new GameObject("SubWaypoint");
                 SP.transform.position = Point1 - (DistanceBetweenPoints* (i+1));
                 SP.transform.parent = transform;
-                if(i == AmountofWayPoints-1){
+                if(i == 0){
                     if(_getsQuestion){
                         SP.AddComponent<QuestionController>();
                         SphereCollider SC =SP.AddComponent<SphereCollider>();
@@ -56,7 +56,7 @@ public class VehiclePath : MonoBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(Waypoints[i].transform.position, Waypoints[i-1].transform.position);
             }
-            if(i == Waypoints.Count -2){
+            if(i == 1){
                 if(_getsQuestion)
                 {
                     Gizmos.color = Color.green;

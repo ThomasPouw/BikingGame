@@ -54,9 +54,10 @@ public class QuestionController : MonoBehaviour
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             for (int i = 0; i < _blockQuestion.Answers.Length; i++)
             {
-                _blockQuestion.Answers[i] = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
+                Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
+                _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
                 Transform P = _answerHolderPanel.transform.GetChild(i);
-                P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = i.ToString();
+                P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
                 P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
                 Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
                 if(_blockQuestion.Answers[i].HelperImages != null){
@@ -79,12 +80,15 @@ public class QuestionController : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if(_blockQuestion != null && _allowedToVote){
             if(Input.GetKey(KeyCode.Alpha1) && _blockQuestion.Answers[0] != null){
+                Debug.Log("1");
             isCorrectAnswer(_blockQuestion.Answers[0]);
             }
             else if(Input.GetKey(KeyCode.Alpha2) && _blockQuestion.Answers[1] != null){
+                Debug.Log("2");
             isCorrectAnswer(_blockQuestion.Answers[1]);
             }
             else if(Input.GetKey(KeyCode.Alpha3) && _blockQuestion.Answers[2] != null){
+                Debug.Log("3");
             isCorrectAnswer(_blockQuestion.Answers[2]);
             }
         }
@@ -103,8 +107,11 @@ public class QuestionController : MonoBehaviour
         _questionPanel = GameObject.Find("QuestionScreen");
         _questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
         _answerHolderPanel = GameObject.Find("AnswerHolder");
-        _blockQuestion = transform.parent.parent.parent.Find("Question").GetComponentInChildren<BaseQuestion>();
-        _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
+        Transform question = transform.parent.parent.parent.Find("Question");
+        if(question != null)
+        _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
         _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
+        _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
+        
     }
 }

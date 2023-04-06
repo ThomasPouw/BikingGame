@@ -61,6 +61,7 @@ public class LevelStorage : MonoBehaviour
     }
     public JSONLevelSize ReadLevel(string LevelName){
         JSONlevelSize = JSONlevelSizes.Find(x => x.levelName == LevelName);
+        Debug.Log("Im at level Read");
         return JSONlevelSize;
         //LevelSize levelSize = GameObject.Find("LevelMaker").GetComponent<LevelSize>();
         //levelSize.SetValue(JSONlevelSize);
