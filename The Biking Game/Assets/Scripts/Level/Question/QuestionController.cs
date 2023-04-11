@@ -15,7 +15,7 @@ public class QuestionController : MonoBehaviour
     [SerializeField] private GameObject _answerHolderPanel;
     [SerializeField] private ImageStorage _imageStorage;
     private GameObject _answerPanel;
-    private TMP_Text _questionText;
+    [SerializeField]private TMP_Text _questionText;
     private PointComboUI _pointComboUI;
     [SerializeField]private bool _allowedToVote;
 
@@ -51,6 +51,7 @@ public class QuestionController : MonoBehaviour
         if(_blockQuestion != null){
             _questionPanel.SetActive(true);
             _blockQuestion.Question = new Translation().TranslateSentence(_blockQuestion.Question.OriginalLine, "Question");
+            Debug.Log(_questionText.text);
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             for (int i = 0; i < _blockQuestion.Answers.Length; i++)
             {
@@ -105,11 +106,11 @@ public class QuestionController : MonoBehaviour
     private void OnEnable() {
         _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
         _questionPanel = GameObject.Find("QuestionScreen");
-        _questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
         _answerHolderPanel = GameObject.Find("AnswerHolder");
         Transform question = transform.parent.parent.parent.Find("Question");
         if(question != null)
         _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
+        _questionText = _questionPanel.transform.Find("Question").GetComponent<TMP_Text>();
         _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
         _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
         
