@@ -8,6 +8,7 @@ public class VehiclePath : MonoBehaviour
     [SerializeField] private int AmountofWayPoints;
     [SerializeField] public List<GameObject> Waypoints;
     [SerializeField] private bool _getsQuestion;
+    [SerializeField] private bool _isSpecialRoad;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,9 @@ public class VehiclePath : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
+        //Waypoints.RemoveAll(GameObject => GameObject == null);
         if(Waypoints.Count == 0 || Waypoints.Count != AmountofWayPoints+2){
+            //Waypoints.Remove(null);
             Waypoints = new List<GameObject>();
             if(transform.childCount != 2){
                 Debug.LogError("This path does not have enough Waypoints!");
@@ -36,14 +39,16 @@ public class VehiclePath : MonoBehaviour
                 GameObject SP = new GameObject("SubWaypoint");
                 SP.transform.position = Point1 - (DistanceBetweenPoints* (i+1));
                 SP.transform.parent = transform;
-                if(i == 0){
-                    if(_getsQuestion){
-                        SP.AddComponent<QuestionController>();
-                        SphereCollider SC =SP.AddComponent<SphereCollider>();
-                        SC.isTrigger = true;
-                        SC.radius = 0.75f;
+                if(_getsQuestion){
+                        if(i== 0){
+                            SP.AddComponent<QuestionController>();
+                            SphereCollider SC =SP.AddComponent<SphereCollider>();
+                            SC.isTrigger = true;
+                            SC.radius = 0.75f;
+                            Gizmos.color = Color.green;
+                            Gizmos.DrawWireSphere(Waypoints[i].transform.position, 0.75f);
+                        }
                     }
-                }
                 Waypoints.Add(SP);
             }
             Waypoints.Add(transform.GetChild(1).gameObject);
@@ -56,11 +61,18 @@ public class VehiclePath : MonoBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(Waypoints[i].transform.position, Waypoints[i-1].transform.position);
             }
-            if(i == 1){
-                if(_getsQuestion)
-                {
+            if((_isSpecialRoad && _getsQuestion) || i == 1)
+            {
+                SphereCollider SC = Waypoints[i].GetComponent<SphereCollider>();
+                if(SC != null){
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireSphere(Waypoints[i].transform.position, 0.75f);
+                    if(Waypoints[i].GetComponent<QuestionController>() == null)
+                    {
+                        Waypoints[i].AddComponent<QuestionController>();
+                        SC.isTrigger = true;
+                        SC.radius = 0.75f;
+                    }
                 }
             }
         }

@@ -40,16 +40,11 @@ public class LevelStorage : MonoBehaviour
                 Debug.Log("Level Mission complete!");
                 DataSnapshot snapshot = task.Result;
                 Debug.Log(snapshot.GetRawJsonValue());
-                //JSONlevelSizes = JsonUtility.FromJson<List<JSONLevelSize>>(snapshot.Children.GetRawJsonValue());
-                //Debug.Log(JSONlevelSizes.ToString());
                 foreach (DataSnapshot child in snapshot.Children)
                 {
                     JSONLevelSize loadLevel = JsonUtility.FromJson<JSONLevelSize>(child.GetRawJsonValue());
-                    Debug.Log(loadLevel.levelName);
                     JSONlevelSizes.Add(loadLevel);
-                    //LanguageOptions.Add(loadLanguage.LanguageName);
                 }
-                //selectCurrentLanguage(AllLanguages[0].LanguageName);
                 }
             }
         );
@@ -61,11 +56,7 @@ public class LevelStorage : MonoBehaviour
     }
     public JSONLevelSize ReadLevel(string LevelName){
         JSONlevelSize = JSONlevelSizes.Find(x => x.levelName == LevelName);
-        Debug.Log("Im at level Read");
         return JSONlevelSize;
-        //LevelSize levelSize = GameObject.Find("LevelMaker").GetComponent<LevelSize>();
-        //levelSize.SetValue(JSONlevelSize);
-
     }
     
 
