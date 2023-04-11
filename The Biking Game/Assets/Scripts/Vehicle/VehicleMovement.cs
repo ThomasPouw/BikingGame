@@ -42,8 +42,8 @@ public class VehicleMovement : MonoBehaviour
                 RaycastHit hit;
                 if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit)){
                     WayPoints = hit.collider.gameObject;
-                    vehiclePath = hit.collider.gameObject.transform.GetChild(0).GetComponentInChildren<VehiclePath>();
-                    BaseQuestion BQ = hit.collider.GetComponentInChildren<BaseQuestion>();
+                    vehiclePath = hit.collider.gameObject.transform.Find("Waypoint").GetComponentInChildren<VehiclePath>();
+                    BaseQuestion BQ = hit.collider.transform.Find("Question").GetComponentInChildren<BaseQuestion>();
                     if(BQ != null){
                         BQ.QuestionVehicleMovement(StartEnd.Start);
                     }

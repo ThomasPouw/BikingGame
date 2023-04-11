@@ -32,6 +32,9 @@ public class BlockRotation : MonoBehaviour
     private void Start() {
         rotateBlock();
     }
+    private void OnEnable() {
+        //rotateBlock();
+    }
     private void OnDrawGizmos() {
         //rotateBlock();
     }

@@ -37,7 +37,7 @@ public class TranslationStorage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(CurrentLanguage.ToString());
     }
     public void selectCurrentLanguage(string languageName)
     {
