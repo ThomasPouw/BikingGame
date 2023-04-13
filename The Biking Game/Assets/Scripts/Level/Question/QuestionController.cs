@@ -28,9 +28,22 @@ public class QuestionController : MonoBehaviour
         _allowedToVote = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void OnTriggerEnter(Collider other) {
+        if(_blockQuestion != null){
+            _navMeshAgent.isStopped = true;
+            SetQuestionUI();
+        }
+    }
+    private void OnEnable() {
+        _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
+        _questionPanel = GameObject.Find("QuestionScreen");
+        _answerHolderPanel = GameObject.Find("AnswerHolder");
+        Transform question = transform.parent.parent.parent.Find("Question");
+        if(question != null)
+        _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
+        _questionText = _questionPanel.transform.Find("Question").GetComponent<TMP_Text>();
+        _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
+        _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
         
     }
     public void isCorrectAnswer(Entry answer){
@@ -51,26 +64,10 @@ public class QuestionController : MonoBehaviour
         if(_blockQuestion != null){
             _questionPanel.SetActive(true);
             _blockQuestion.Question = new Translation().TranslateSentence(_blockQuestion.Question.OriginalLine, "Question");
-            Debug.Log(_questionText.text);
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             for (int i = 0; i < _blockQuestion.Answers.Length; i++)
             {
-                Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
-                _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
-                Transform P = _answerHolderPanel.transform.GetChild(i);
-                P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
-                P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
-                Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
-                if(_blockQuestion.Answers[i].HelperImages != null){
-                    for (int ii = 0; ii < _blockQuestion.Answers[i].HelperImages.Length; ii++)
-                    {
-                        Debug.Log(_helperImages.Length);
-                        _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperImages[ii]);
-                        //texture.LoadRawTextureData(ImageStorage.Images[_blockQuestion.Answers[i].HelperImages[ii]]);
-                        //_helperImages[ii].defaultMaterial.mainTexture = texture;
-                        //Need way to load images
-                    }
-                }
+                StartCoroutine(LoadAnswer(i));
             }
         }
         else{
@@ -94,25 +91,28 @@ public class QuestionController : MonoBehaviour
             }
         }
     }
+    IEnumerator LoadAnswer(int i){
+        Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
+        Debug.Log(_blockQuestion.Answers[i].OriginalLine);
+        Debug.Log(answer.TranslatedLine);
+        _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
+        Transform P = _answerHolderPanel.transform.GetChild(i);
+        P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
+        P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
+        Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
+        if(_blockQuestion.Answers[i].HelperImages != null){
+            for (int ii = 0; ii < _blockQuestion.Answers[i].HelperImages.Length; ii++)
+            {
+                _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperImages[ii]);
+                //texture.LoadRawTextureData(ImageStorage.Images[_blockQuestion.Answers[i].HelperImages[ii]]);
+                //_helperImages[ii].defaultMaterial.mainTexture = texture;
+            //Need way to load images
+                }
+            }
+        yield return new WaitForSeconds(2f);
+    }
     public void ControleSpeed(float Speed){
         _navMeshAgent.speed = Speed;
     }
-    void OnTriggerEnter(Collider other) {
-        if(_blockQuestion != null){
-            _navMeshAgent.isStopped = true;
-            SetQuestionUI();
-        }
-    }
-    private void OnEnable() {
-        _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
-        _questionPanel = GameObject.Find("QuestionScreen");
-        _answerHolderPanel = GameObject.Find("AnswerHolder");
-        Transform question = transform.parent.parent.parent.Find("Question");
-        if(question != null)
-        _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
-        _questionText = _questionPanel.transform.Find("Question").GetComponent<TMP_Text>();
-        _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
-        _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
-        
-    }
+    
 }

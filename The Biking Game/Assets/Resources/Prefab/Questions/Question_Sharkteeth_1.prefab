@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4350148131506278515}
   - component: {fileID: 4323847614870220538}
   - component: {fileID: 8889806868761804471}
+  - component: {fileID: 3605523586585732346}
   m_Layer: 6
-  m_Name: Car1
+  m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +148,102 @@ MonoBehaviour:
   vehiclePath: {fileID: 1703933209056748005}
   vehicleMovement: {fileID: 9129457340425906134}
   navMeshAgent: {fileID: 3417661609894632028}
+--- !u!82 &3605523586585732346
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040715319071691901}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 5433518095930586808, guid: 95a22929b15d9c84b8655c75b7b2a454, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2349087848549663258
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +575,7 @@ GameObject:
   - component: {fileID: 5461594453682453260}
   - component: {fileID: 7865890531632022624}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,6 +806,7 @@ GameObject:
   - component: {fileID: 8263948775839648052}
   - component: {fileID: 6621522048957976485}
   - component: {fileID: 7323755045743439567}
+  - component: {fileID: 768752279828468560}
   m_Layer: 0
   m_Name: Question_Sharkteeth_1
   m_TagString: Untagged
@@ -736,7 +834,7 @@ Transform:
   - {fileID: 2936465264079107279}
   - {fileID: 2533136131771290095}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6621522048957976485
 MonoBehaviour:
@@ -785,6 +883,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
+--- !u!114 &768752279828468560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975613721149427095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ded6166c023504b888aed77293e39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: 0.1
+  tireNoises: []
+  currentTireNoise: {fileID: 0}
+  soundOriginTire: {fileID: 4520159122880798754}
+  CarAudioMain: {fileID: 4716974044766340656, guid: 95a22929b15d9c84b8655c75b7b2a454, type: 2}
+  playSoundGeneral: 0
+  hornNoises: []
+  currentHornNoise: {fileID: 0}
+  soundOriginHorn: {fileID: 3605523586585732346}
+  playSoundHorn: 0
+  SuccesRate: 10
 --- !u!1 &4536942181281095173
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,8 +1024,9 @@ GameObject:
   - component: {fileID: 3703947334041011595}
   - component: {fileID: 84983642317118650}
   - component: {fileID: 2469805618440170613}
+  - component: {fileID: 4520159122880798754}
   m_Layer: 6
-  m_Name: Torus
+  m_Name: Tires
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,6 +1119,102 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8803937527578110353, guid: 419cfe7a058a1f749b60dddae80add27, type: 3}
+--- !u!82 &4520159122880798754
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734031900278554659}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -4124996353676698429, guid: 95a22929b15d9c84b8655c75b7b2a454, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5544833674487949278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1288,7 @@ GameObject:
   - component: {fileID: 8634681706104487812}
   - component: {fileID: 1665863560154746988}
   - component: {fileID: 5566513265211772859}
+  - component: {fileID: 178275620122047182}
   m_Layer: 0
   m_Name: SubWaypoint
   m_TagString: Untagged
@@ -1129,6 +1348,25 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &178275620122047182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718550020791193239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79a6dfd74ba6414e8bf762c845a70c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blockQuestion: {fileID: 0}
+  _navMeshAgent: {fileID: 0}
+  _questionPanel: {fileID: 0}
+  _answerHolderPanel: {fileID: 0}
+  _imageStorage: {fileID: 0}
+  _questionText: {fileID: 0}
+  _allowedToVote: 0
 --- !u!1 &6750473468760699616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,3 +1711,4 @@ MonoBehaviour:
   - {fileID: 5605710199116438648}
   - {fileID: 8981637234626590500}
   _getsQuestion: 0
+  _isSpecialRoad: 0

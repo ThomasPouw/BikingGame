@@ -29,8 +29,6 @@ public class Translation
         //Database stuff!
     }*/
     public Entry TranslateSentence(string sentence, string dictionaryType){
-        Debug.Log(TranslationStorage.CurrentLanguage[dictionaryType][sentence].OriginalLine);
-        Debug.Log(TranslationStorage.CurrentLanguage[dictionaryType][sentence].TranslatedLine);
         return TranslationStorage.CurrentLanguage[dictionaryType][sentence];
     }
 }

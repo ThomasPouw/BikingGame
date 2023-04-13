@@ -33,14 +33,16 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     m_Colors:
     - _Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
     - _MainColour: {r: 0.5337843, g: 0.7924528, b: 0.7228801, a: 0}
