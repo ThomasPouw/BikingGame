@@ -15,7 +15,7 @@ public class QuestionController : MonoBehaviour
     [SerializeField] private GameObject _answerHolderPanel;
     [SerializeField] private ImageStorage _imageStorage;
     private GameObject _answerPanel;
-    private TMP_Text _questionText;
+    [SerializeField]private TMP_Text _questionText;
     private PointComboUI _pointComboUI;
     [SerializeField]private bool _allowedToVote;
 
@@ -30,10 +30,25 @@ public class QuestionController : MonoBehaviour
         _allowedToVote = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnTriggerEnter(Collider other) {
+        if(_blockQuestion != null){
+            _navMeshAgent.isStopped = true;
+            SetQuestionUI();
+        }
+    }
+    private void OnEnable() {
+        if(GameObject.Find("BikeOperator") != null){
+            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
+            _questionPanel = GameObject.Find("QuestionScreen");
+            _answerHolderPanel = GameObject.Find("AnswerHolder");
+            Transform question = transform.parent.parent.parent.Find("Question");
+            if(question != null)
+                _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
+            _questionText = _questionPanel.transform.Find("Question").GetComponent<TMP_Text>();
+            _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
+            _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
+            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();   
+        }
     }
     public void isCorrectAnswer(Entry answer){
         _allowedToVote = false;
@@ -56,21 +71,7 @@ public class QuestionController : MonoBehaviour
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             for (int i = 0; i < _blockQuestion.Answers.Length; i++)
             {
-                _blockQuestion.Answers[i] = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
-                Transform P = _answerHolderPanel.transform.GetChild(i);
-                P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = i.ToString();
-                P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
-                Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
-                if(_blockQuestion.Answers[i].HelperImages != null){
-                    for (int ii = 0; ii < _blockQuestion.Answers[i].HelperImages.Length; ii++)
-                    {
-                        Debug.Log(_helperImages.Length);
-                        _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperImages[ii]);
-                        //texture.LoadRawTextureData(ImageStorage.Images[_blockQuestion.Answers[i].HelperImages[ii]]);
-                        //_helperImages[ii].defaultMaterial.mainTexture = texture;
-                        //Need way to load images
-                    }
-                }
+                StartCoroutine(LoadAnswer(i));
             }
         }
         else{
@@ -81,35 +82,40 @@ public class QuestionController : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if(_blockQuestion != null && _allowedToVote){
             if(Input.GetKey(KeyCode.Alpha1) && _blockQuestion.Answers[0] != null){
+                Debug.Log("1");
             isCorrectAnswer(_blockQuestion.Answers[0]);
             }
             else if(Input.GetKey(KeyCode.Alpha2) && _blockQuestion.Answers[1] != null){
+                Debug.Log("2");
             isCorrectAnswer(_blockQuestion.Answers[1]);
             }
             else if(Input.GetKey(KeyCode.Alpha3) && _blockQuestion.Answers[2] != null){
+                Debug.Log("3");
             isCorrectAnswer(_blockQuestion.Answers[2]);
             }
         }
     }
+    IEnumerator LoadAnswer(int i){
+        Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
+        Debug.Log(_blockQuestion.Answers[i].OriginalLine);
+        Debug.Log(answer.TranslatedLine);
+        _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
+        Transform P = _answerHolderPanel.transform.GetChild(i);
+        P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
+        P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
+        Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
+        if(_blockQuestion.Answers[i].HelperImages != null){
+            for (int ii = 0; ii < _blockQuestion.Answers[i].HelperImages.Length; ii++)
+            {
+                _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperImages[ii]);
+                //texture.LoadRawTextureData(ImageStorage.Images[_blockQuestion.Answers[i].HelperImages[ii]]);
+                //_helperImages[ii].defaultMaterial.mainTexture = texture;
+            //Need way to load images
+                }
+            }
+        yield return new WaitForSeconds(2f);
+    }
     public void ControleSpeed(float Speed){
         _navMeshAgent.speed = Speed;
-    }
-    void OnTriggerEnter(Collider other) {
-        if(_blockQuestion != null){
-            _navMeshAgent.isStopped = true;
-            SetQuestionUI();
-        }
-    }
-    private void OnEnable() {
-        if(GameObject.Find("BikeOperator") != null){
-            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
-            _questionPanel = GameObject.Find("QuestionScreen");
-            _questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
-            _answerHolderPanel = GameObject.Find("AnswerHolder");
-            _blockQuestion = transform.parent.parent.parent.Find("Question").GetComponentInChildren<BaseQuestion>();
-            _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
-            _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
-        }
-        
     }
 }

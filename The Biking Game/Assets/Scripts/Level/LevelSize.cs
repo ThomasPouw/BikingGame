@@ -6,6 +6,7 @@ using TMPro;
 
 public class LevelSize : MonoBehaviour
 {
+    public LevelStorage levelStorage;
     public string levelName;
     public int xMax;
     public int zMax;
@@ -13,7 +14,7 @@ public class LevelSize : MonoBehaviour
     public GameObject Plate;
     public List<BlockInfo> tiles = new List<BlockInfo>();
     public List<JsonBlockInfo> alreadyPlacedTilesJSON = new List<JsonBlockInfo>();
-    public List<BlockInfo> alreadyPlacedTiles = new List<BlockInfo>();
+    //public List<BlockInfo> alreadyPlacedTiles = new List<BlockInfo>();
     public NavMeshSurface surfaces;
 
     [Header("LevelEditor Only")]
@@ -23,7 +24,7 @@ public class LevelSize : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        surfaces.BuildNavMesh();
+        
     }
 
     // Update is called once per frame
@@ -70,24 +71,34 @@ public class LevelSize : MonoBehaviour
             }
         }
     }
+    public void SetValue(JSONLevelSize jsonLevelSize)
+    {
+        levelName = jsonLevelSize.levelName;
+        alreadyPlacedTilesJSON = jsonLevelSize.alreadyPlacedTilesJSON;
+        xMax = jsonLevelSize.xMax;
+        zMax = jsonLevelSize.zMax;
+        MakeLevel();
+    }
     public BlockInfo MakeBlock(JsonBlockInfo jsonBlockInfo, int x, int z){
         GameObject tile =tile = Instantiate((GameObject)Resources.Load("Prefab/Roads/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
         tile.name = jsonBlockInfo.tileName;
         GameObject _wayPoints = null;
         GameObject _baseQuestion = null;
-        if(jsonBlockInfo.baseQuestionName != null){
-            _baseQuestion = (GameObject)Instantiate(Resources.Load("Prefab/Question/"+ jsonBlockInfo.baseQuestionName), tile.transform.Find("Question"));
+        if(jsonBlockInfo.baseQuestionName != ""){
+            _baseQuestion = (GameObject)Instantiate(Resources.Load("Prefab/Questions/"+ jsonBlockInfo.baseQuestionName), tile.transform.Find("Question"));
             _baseQuestion.name = jsonBlockInfo.baseQuestionName;
             _baseQuestion.transform.parent = tile.transform.Find("Question").transform;
+            _baseQuestion.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.questionRotation);
         }
-        if(jsonBlockInfo.wayPointName != null){
-            _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/Waypoint/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
+        if(jsonBlockInfo.wayPointName != ""){
+            _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/BikeWaypoints/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
             _wayPoints.name = jsonBlockInfo.wayPointName;
             _wayPoints.transform.parent = tile.transform.Find("Waypoint").transform;
+            _wayPoints.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.wayPointRotation);
         }
         
-        tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.rotation);
+        tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
         tile.transform.parent = transform;
-        return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.rotation);
+        return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.blockRotation, jsonBlockInfo.wayPointRotation, jsonBlockInfo.questionRotation);
     }
 }

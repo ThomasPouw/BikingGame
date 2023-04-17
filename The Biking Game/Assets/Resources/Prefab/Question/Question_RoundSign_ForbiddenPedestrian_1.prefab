@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4170560323198907268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3832028356293064106}
+  - component: {fileID: 2802087763915522957}
+  - component: {fileID: 4213982467856805063}
+  m_Layer: 0
+  m_Name: Question_RoundSign_ForbiddenPedestrian_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3832028356293064106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170560323198907268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2557066252263864027}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &2802087763915522957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170560323198907268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5b34787803cd94a925892e34188876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointsReceived: 125
+  QuestionWrongPunishment: 1
+  Question:
+    OriginalLine: What does this sign mean for pedestrians?
+    TranslatedLine: Wat betekend dit bord voor voetgangers?
+    HelperImages: []
+    IsCorrect: 0
+  Answers:
+  - OriginalLine: Forbidden for pedestrians
+    TranslatedLine: Verboden voor voetgangers
+    HelperImages: []
+    IsCorrect: 0
+  - OriginalLine: Closed for Pedestrians
+    TranslatedLine: Gesloten voor voetgangers
+    HelperImages: []
+    IsCorrect: 1
+  - OriginalLine: Mandatory crosswalk
+    TranslatedLine: Verplichte zebrapad
+    HelperImages: []
+    IsCorrect: 0
+  vehicles: []
+--- !u!114 &4213982467856805063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170560323198907268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 0
+--- !u!1001 &4207445847028712086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3832028356293064106}
+    m_Modifications:
+    - target: {fileID: 134542607920888168, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d034b4b18fc742645a0886a37ba73fce, type: 2}
+    - target: {fileID: 134542607920888168, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58e339797a528d5408087d0a01af61ce, type: 2}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6544226210059346298, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_Name
+      value: RoundSign
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+--- !u!4 &2557066252263864027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1810270586413610061, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+  m_PrefabInstance: {fileID: 4207445847028712086}
+  m_PrefabAsset: {fileID: 0}

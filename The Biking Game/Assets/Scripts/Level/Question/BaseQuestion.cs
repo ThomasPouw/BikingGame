@@ -15,6 +15,9 @@ public abstract class BaseQuestion : MonoBehaviour
 
     private void Start() {
         transform.transform.Find("Waypoint").GetComponentInChildren<QuestionController>().BlockQuestion = this;
+        foreach(Vehicle vehicle in vehicles){
+            vehicle.navMeshAgent.isStopped = true;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -34,16 +37,11 @@ public abstract class BaseQuestion : MonoBehaviour
     }
     IEnumerator vehicleStartMovement(Vehicle vehicle){
         yield return new WaitForSeconds(vehicle.waitStartTime);
-        vehicle.navMeshAgent.isStopped = false;
+        vehicle.navMeshAgent.isStopped = true;
     }
     IEnumerator vehicleEndMovement(Vehicle vehicle){
         yield return new WaitForSeconds(vehicle.waitEndTime);
-        vehicle.navMeshAgent.isStopped = true;
-    }
-    private void Awake() {
-        foreach(Vehicle vehicle in vehicles){
-            vehicle.navMeshAgent.isStopped = true;
-        }
+        vehicle.navMeshAgent.isStopped = false;
     }
 }
     [System.Serializable]

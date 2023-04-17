@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,17 @@ public class LevelStorage : MonoBehaviour
 {
     DatabaseReference reference;
     public static List<JSONLevelSize> JSONlevelSizes;
-    public static JSONLevelSize JSONlevelSize;
+    [SerializeField] public static JSONLevelSize JSONlevelSize;
     [SerializeField] LevelSize levelSize;
 
     // Start is called before the first frame update
     void Start()
     {
         reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-        SaveLevel(new JSONLevelSize(levelSize));
+        if(JSONlevelSizes == null){
+            JSONlevelSizes = new List<JSONLevelSize>();
+            ReadLevels();
+        }
     }
     public void SaveLevel(JSONLevelSize JSONlevelSize){
         reference.Child("level/"+ JSONlevelSize.levelName).SetRawJsonValueAsync(JsonUtility.ToJson(JSONlevelSize));
@@ -23,8 +27,9 @@ public class LevelStorage : MonoBehaviour
     public void DeleteLevel(string LevelName){
         reference.Child("level/"+LevelName).RemoveValueAsync();
     }
-    public void ReadLevels(JSONLevelSize JSONlevelSize){
-        reference.Child("level/").GetValueAsync().ContinueWithOnMainThread(task => 
+    public void ReadLevels(){
+        try{
+            reference.Child("level/").GetValueAsync().ContinueWithOnMainThread(task => 
         {
             if (task.IsFaulted || task.IsCanceled) {
                 Debug.LogError(task.Exception);
@@ -32,24 +37,26 @@ public class LevelStorage : MonoBehaviour
             }
             else if (task.IsCompleted) 
             {
-                Debug.Log("Mission complete!");
+                Debug.Log("Level Mission complete!");
                 DataSnapshot snapshot = task.Result;
                 Debug.Log(snapshot.GetRawJsonValue());
-                JSONlevelSizes = JsonUtility.FromJson<List<JSONLevelSize>>(snapshot.GetRawJsonValue());
-                //foreach (DataSnapshot child in snapshot.Children)
-                //{
-                    // Language loadLanguage = JsonUtility.FromJson<Language>(child.GetRawJsonValue());
-                    // Debug.Log(loadLanguage.LanguageName);
-                    // JSONlevelSizes.Add(loadLanguage);
-                    //LanguageOptions.Add(loadLanguage.LanguageName);
-                //}
-                //selectCurrentLanguage(AllLanguages[0].LanguageName);
+                foreach (DataSnapshot child in snapshot.Children)
+                {
+                    JSONLevelSize loadLevel = JsonUtility.FromJson<JSONLevelSize>(child.GetRawJsonValue());
+                    JSONlevelSizes.Add(loadLevel);
+                }
                 }
             }
         );
+        }
+        catch(Exception E){
+            Debug.LogError(E);
+        }
+        
     }
-    public void ReadLevel(string LevelName){
+    public JSONLevelSize ReadLevel(string LevelName){
         JSONlevelSize = JSONlevelSizes.Find(x => x.levelName == LevelName);
+        return JSONlevelSize;
     }
     
 
@@ -57,5 +64,11 @@ public class LevelStorage : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnEnable() {
+        reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
+        if(JSONlevelSizes == null){
+            ReadLevels();
+        }
     }
 }

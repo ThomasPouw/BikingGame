@@ -10,5 +10,7 @@ public class JsonBlockInfo
     public string tileName;
     public string wayPointName;
     public string baseQuestionName;
-    public Rotation rotation;
+    public Rotation blockRotation;
+    public Rotation wayPointRotation;
+    public Rotation questionRotation;
 }
