@@ -22,9 +22,11 @@ public class QuestionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(_questionPanel != null){
+            _questionPanel.SetActive(false);
+            _navMeshAgent.isStopped = false;
+        }
         
-        _questionPanel.SetActive(false);
-        _navMeshAgent.isStopped = false;
         _allowedToVote = true;
     }
 
@@ -99,12 +101,15 @@ public class QuestionController : MonoBehaviour
         }
     }
     private void OnEnable() {
-        _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
-        _questionPanel = GameObject.Find("QuestionScreen");
-        _questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
-        _answerHolderPanel = GameObject.Find("AnswerHolder");
-        _blockQuestion = transform.parent.parent.parent.Find("Question").GetComponentInChildren<BaseQuestion>();
-        _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
-        _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
+        if(GameObject.Find("BikeOperator") != null){
+            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
+            _questionPanel = GameObject.Find("QuestionScreen");
+            _questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
+            _answerHolderPanel = GameObject.Find("AnswerHolder");
+            _blockQuestion = transform.parent.parent.parent.Find("Question").GetComponentInChildren<BaseQuestion>();
+            _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
+            _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
+        }
+        
     }
 }

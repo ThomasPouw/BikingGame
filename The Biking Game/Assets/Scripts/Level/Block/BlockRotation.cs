@@ -29,7 +29,7 @@ public class BlockRotation : MonoBehaviour
                 break;
         }
     }
-    private void OnDrawGizmos() {
+    private void Start() {
         rotateBlock();
     }
 }
