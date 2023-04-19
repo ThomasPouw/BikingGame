@@ -22,21 +22,23 @@ public class QuestionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(_questionPanel != null){
-            _questionPanel.SetActive(false);
-            _navMeshAgent.isStopped = false;
-        }
+        //if(_questionPanel != null){
+        //    _questionPanel.SetActive(false);
+        //    _navMeshAgent.isStopped = false;
+        //}
         
         _allowedToVote = true;
     }
 
     void OnTriggerEnter(Collider other) {
         if(_blockQuestion != null){
+            Debug.Log(gameObject);
             _navMeshAgent.isStopped = true;
             SetQuestionUI();
         }
     }
     private void OnEnable() {
+        Debug.Log(gameObject);
         if(GameObject.Find("BikeOperator") != null){
             _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
             _questionPanel = GameObject.Find("QuestionScreen");
@@ -98,7 +100,6 @@ public class QuestionController : MonoBehaviour
     IEnumerator LoadAnswer(int i){
         Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
         Debug.Log(_blockQuestion.Answers[i].OriginalLine);
-        Debug.Log(answer.TranslatedLine);
         _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
         Transform P = _answerHolderPanel.transform.GetChild(i);
         P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();

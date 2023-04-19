@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarningSign 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1959804635736669599, guid: 30cc53935316c144384d1065ca068693, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2641346491087163087, guid: 30cc53935316c144384d1065ca068693, type: 3}
       propertyPath: m_RootOrder
       value: -1

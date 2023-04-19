@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ToonRamp:
-        m_Texture: {fileID: 2800000, guid: b3bef80c47bcb2c4ebfefc9cf542481a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 54b7e5d980b56aa4d8cb971cc49fb8aa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

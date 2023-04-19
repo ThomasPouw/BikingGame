@@ -6,7 +6,6 @@ public class TestSpawn : MonoBehaviour
 {
     [SerializeField] LevelSize levelSize;
     [SerializeField] JsonBlockInfo jsonBlockInfo;
-    [SerializeField] LevelSize levelSize;
     [SerializeField] bool Activate = false;
     // Start is called before the first frame update
     void Start()

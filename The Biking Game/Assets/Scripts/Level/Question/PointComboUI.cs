@@ -9,7 +9,7 @@ public class PointComboUI : MonoBehaviour
     public float Points {
         get{return _points;} 
         set {
-            _points += (value * (_comboModifier* _combo));
+            _points += (value * Mathf.Pow(_comboModifier, _combo));
             pointTextWriter();
             }
         }

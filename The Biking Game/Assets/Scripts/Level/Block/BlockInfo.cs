@@ -33,11 +33,16 @@ public class BlockInfo
     public JsonBlockInfo getJsonBlockInfo(){
         JsonBlockInfo jsonBlockInfo = new JsonBlockInfo();
         jsonBlockInfo.blockRotation = _blockRotation;
-        jsonBlockInfo.baseQuestionName = _baseQuestion.name;
-        jsonBlockInfo.wayPointName = _wayPoints.name;
+        if(_baseQuestion != null){
+            jsonBlockInfo.baseQuestionName = _baseQuestion.name;
+            jsonBlockInfo.questionRotation = _questionRotation;
+        }
+        if(_wayPoints != null){
+            jsonBlockInfo.wayPointName = _wayPoints.name;
+            jsonBlockInfo.wayPointRotation = _waypointRotation;
+        }
         jsonBlockInfo.tileName = tile.name;
-        jsonBlockInfo.wayPointRotation = _waypointRotation;
-        jsonBlockInfo.questionRotation = _questionRotation;
+        
         jsonBlockInfo.x = X;
         jsonBlockInfo.z = Z;
         return jsonBlockInfo;

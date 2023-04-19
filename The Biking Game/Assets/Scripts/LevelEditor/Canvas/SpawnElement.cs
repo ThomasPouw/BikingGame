@@ -24,6 +24,8 @@ public class SpawnElement : MonoBehaviour
         _spawn = Instantiate(AbleToSpawn[0], Parent.transform.Find(_gameObjectlocation));
         //_baseQuestion.name = jsonBlockInfo.baseQuestionName;
         _spawn.transform.parent = Parent.transform.Find(_gameObjectlocation).transform;
+        
+
     }
     
 }

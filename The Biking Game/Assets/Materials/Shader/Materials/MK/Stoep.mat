@@ -28,7 +28,7 @@ Material:
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_EMISSION
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-  - _MK_LIGHT_BANDED
+  - _MK_LIGHT_CEL
   - _MK_OUTLINE_HULL_CLIP
   - _MK_RECEIVE_SHADOWS
   - _MK_SPECULAR_ISOTROPIC
@@ -221,10 +221,10 @@ Material:
     - _IridescenceSize: 1
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
-    - _Light: 2
+    - _Light: 1
     - _LightBands: 3
     - _LightBandsScale: 0.5
-    - _LightThreshold: 0.471
+    - _LightThreshold: 0.482
     - _Metallic: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1

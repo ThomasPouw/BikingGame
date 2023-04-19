@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundSign
       objectReference: {fileID: 0}
+    - target: {fileID: 6544226210059346298, guid: 4e7f8b8775432c14da578fd46e96ed0c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -24,7 +24,7 @@ public class VehicleMovement : MonoBehaviour
         if(ready){
             if (!_navMeshAgent.isActiveAndEnabled)
         _navMeshAgent.enabled = true;
-        if(vehiclePath == null){
+        if(vehiclePath == null && _navMeshAgent.isOnNavMesh){
                 RaycastHit hit;
                 if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit)){
                     WayPoints = hit.collider.gameObject;
@@ -35,7 +35,6 @@ public class VehicleMovement : MonoBehaviour
                     }
                     Debug.Log(vehiclePath);
                 }
-                _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
         }
         if(_navMeshAgent.remainingDistance <= 1){
             if(vehiclePath.Waypoints.Count == WayPointCount-1){

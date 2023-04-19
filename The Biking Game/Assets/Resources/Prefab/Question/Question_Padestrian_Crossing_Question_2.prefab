@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4851606979725482181}
   - component: {fileID: 8576505851453029959}
   - component: {fileID: 5070814533743022518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04f704f1504901e419dd6584ee996ece, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path).001 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -409,6 +413,10 @@ PrefabInstance:
     - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
       propertyPath: m_Name
       value: Zebra (Path).001 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -476,6 +484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path).001 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -541,6 +553,10 @@ PrefabInstance:
     - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
       propertyPath: m_Name
       value: Zebra (Path).001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432782205459065922, guid: 2537e669a62f51647919f32abf5161f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

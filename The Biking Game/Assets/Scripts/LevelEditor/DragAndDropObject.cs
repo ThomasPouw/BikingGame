@@ -17,13 +17,14 @@ public class DragAndDropObject : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, out hit)){
             GameObject replaced = hit.collider.gameObject;
             LevelSize levelSize = GameObject.Find("LevelEditor").GetComponent<LevelSize>();
-            
             int index = levelSize.tiles.FindIndex(x => x.tile == replaced);
             levelSize.tiles.Insert(index, new BlockInfo(gameObject, levelSize.tiles[index].X, levelSize.tiles[index].Z));
+
             transform.position = replaced.transform.position;
             transform.parent = GameObject.Find("LevelEditor").transform;
             Destroy(replaced);
             levelSize.tiles.RemoveAt(index+1);
+            GetComponent<CanvasMenuAppear>().enabled = true;
             enabled = false;
         }
     }

@@ -25,10 +25,7 @@ public class CanvasMenuAppear : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //if (!popupManager.GetPopupOpened())
-        //{
-            //popupManager.ChangeState(true);
-            
+
             MenuPanel = Instantiate(popUpPanel);
             MenuPanel.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
             //Testing.GetComponent<PanelControler>().setClickableEvent(updateClickable);
@@ -53,13 +50,7 @@ public class CanvasMenuAppear : MonoBehaviour
                     break;
                 }
             }
-            popupStorage.panel = MenuPanel;
-            //MenuPanel.GetComponentInChildren<TMP_Text>().text = mainText;
-            //MenuPanel.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = leftButton;
-            //MenuPanel.transform.GetChild(2).GetComponentInChildren<TMP_Text>().text = rightButton;
-        //}
-        //gameObject.Destroy();
-        
+            popupStorage.panel = MenuPanel;     
     }
     
 

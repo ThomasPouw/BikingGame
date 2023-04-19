@@ -22,7 +22,12 @@ public class LevelStorage : MonoBehaviour
         }
     }
     public void SaveLevel(JSONLevelSize JSONlevelSize){
-        reference.Child("level/"+ JSONlevelSize.levelName).SetRawJsonValueAsync(JsonUtility.ToJson(JSONlevelSize));
+        try{
+            reference.Child("level/"+ JSONlevelSize.levelName).SetRawJsonValueAsync(JsonUtility.ToJson(JSONlevelSize));
+        }
+        catch(Exception E){
+            Debug.LogError(E);
+        }
     }
     public void DeleteLevel(string LevelName){
         reference.Child("level/"+LevelName).RemoveValueAsync();

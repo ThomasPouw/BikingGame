@@ -36,7 +36,7 @@ public class BlockRotation : MonoBehaviour
         //rotateBlock();
     }
     private void OnDrawGizmos() {
-        //rotateBlock();
+        rotateBlock();
     }
 }
 public enum Rotation{

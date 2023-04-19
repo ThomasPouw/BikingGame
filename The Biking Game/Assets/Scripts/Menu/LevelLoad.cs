@@ -7,30 +7,13 @@ using TMPro;
 public class LevelLoad : MonoBehaviour
 {
     [SerializeField] public bool foundLevels = false;
-    public void LoadLevel(MenuInfo menuInfo){
-        Debug.Log(menuInfo);
-        StaticMachine.menuInfo.SetValue(menuInfo);
-        SceneManager.LoadScene("Level");
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        if(LevelStorage.JSONlevelSizes.Count != 0 && !foundLevels){
-            foundLevels = true;
-            GameObject LevelHolder = GameObject.Find("LevelHolder");
+    private void Update() {
+        if(LevelStorage.JSONlevelSizes.Count != 0 && !foundLevels && gameObject.activeInHierarchy){
             int levelPanelCounter = 0;
             foreach (JSONLevelSize jSONLevelSize in LevelStorage.JSONlevelSizes)
             {
                 Debug.Log(jSONLevelSize);
-                GameObject LevelPanel = LevelHolder.transform.GetChild(0).gameObject;
+                GameObject LevelPanel = transform.GetChild(levelPanelCounter).gameObject;
                 levelPanelCounter++;
                 if(LevelPanel != null){
                     Debug.Log(LevelPanel);
@@ -39,7 +22,9 @@ public class LevelLoad : MonoBehaviour
                     LevelPanel.GetComponent<MenuInfo>().SetValue(jSONLevelSize.levelName, 0);
                 }
             }
-            
+            foundLevels = true;
         }
     }
+    
+        
 }

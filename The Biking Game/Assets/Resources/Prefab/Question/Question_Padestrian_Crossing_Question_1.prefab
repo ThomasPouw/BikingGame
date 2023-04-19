@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 312798573715115442}
   - component: {fileID: 7140388165134695793}
   - component: {fileID: 8964995476649328037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04f704f1504901e419dd6584ee996ece, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path) (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -377,6 +381,10 @@ PrefabInstance:
     - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_Name
       value: Zebra (Path) (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
@@ -448,6 +456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -517,6 +529,10 @@ PrefabInstance:
     - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_Name
       value: Zebra (Path) (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
@@ -588,6 +604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -657,6 +677,10 @@ PrefabInstance:
     - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_Name
       value: Zebra (Path) (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
@@ -728,6 +752,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra (Path) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -797,6 +825,10 @@ PrefabInstance:
     - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_Name
       value: Zebra (Path)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989064943967357398, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4923512751793814509, guid: cbcbbe62ada23c946a3b722713402ed9, type: 3}
       propertyPath: m_RootOrder
