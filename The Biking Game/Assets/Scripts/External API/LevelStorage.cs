@@ -71,9 +71,9 @@ public class LevelStorage : MonoBehaviour
         
     }
     private void OnEnable() {
-        reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-        if(JSONlevelSizes == null){
-            ReadLevels();
-        }
+        //reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
+        //if(JSONlevelSizes == null){
+        //    ReadLevels();
+        //}
     }
 }
