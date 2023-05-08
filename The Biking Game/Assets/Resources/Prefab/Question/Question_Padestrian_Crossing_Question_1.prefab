@@ -57,7 +57,7 @@ MonoBehaviour:
   PointsReceived: 100
   QuestionWrongPunishment: 1
   Question:
-    OriginalLine: Who has priority? The pedestrian or you
+    OriginalLine: Who has priority? The pedestrian or you?
     TranslatedLine: Wie heeft voorrang? De voetganger of jij?
     HelperImages: []
     IsCorrect: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
     TranslatedLine: De voetganger
     HelperImages: []
     IsCorrect: 0
-  - OriginalLine: You
+  - OriginalLine: Me
     TranslatedLine: jij
     HelperImages: []
     IsCorrect: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
+  _rotationCount: 0
 --- !u!1001 &259567379879237827
 PrefabInstance:
   m_ObjectHideFlags: 0

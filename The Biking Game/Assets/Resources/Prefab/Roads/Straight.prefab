@@ -105,10 +105,8 @@ GameObject:
   - component: {fileID: 7351099255575976155}
   - component: {fileID: 7344531605398907396}
   - component: {fileID: 5853389478109301641}
-  - component: {fileID: 6654098004542532576}
   - component: {fileID: 2108961120291237509}
   - component: {fileID: 577078630464204991}
-  - component: {fileID: 3122236067825995140}
   m_Layer: 0
   m_Name: Straight
   m_TagString: Untagged
@@ -123,7 +121,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8332408485866700264}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -132,7 +130,7 @@ Transform:
   - {fileID: 4324688120177117401}
   - {fileID: 3248597534799173791}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7351099255575976155
 MeshFilter:
@@ -207,19 +205,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2405365958620393163, guid: 18bb6da1b26cd104885e50e906d820e9, type: 3}
---- !u!114 &6654098004542532576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8332408485866700264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe5bdfee3d856749bc843f4519e192a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holdingItem: 0
 --- !u!114 &2108961120291237509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,8 +217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a8a6af500baf04288899bed4390ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowedQuestions: []
-  AllowedWayPoints: []
+  AllowedQuestions:
+  - {fileID: 6723076724109831941, guid: 55fda2dcabc6eb44db986d126e7555f9, type: 3}
+  - {fileID: 6723076724109831941, guid: e2deb224e60c01b4ca7ebd83cfe52f69, type: 3}
+  AllowedWayPoints:
+  - {fileID: 407756859715804503, guid: 08da2df692f4d374aa6d7a414847e736, type: 3}
+  - {fileID: 407756859715804503, guid: 6896175d9e9cfbe4d8b5ab6d6cf0e4d8, type: 3}
+  - {fileID: 407756859715804503, guid: db174b4284e8d6b45b13b8503163cd2b, type: 3}
 --- !u!114 &577078630464204991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,17 +237,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
---- !u!114 &3122236067825995140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8332408485866700264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98276fea4fb77dc48a12e7a1d2e366f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupStorage: {fileID: 0}
-  popUpPanel: {fileID: 9010460235111254631, guid: 0e896c49063816348b6d183cad0368e6, type: 3}
+  _rotationCount: 0

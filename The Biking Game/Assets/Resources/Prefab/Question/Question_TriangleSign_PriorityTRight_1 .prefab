@@ -58,11 +58,11 @@ MonoBehaviour:
     TranslatedLine: Nee, ik moet voorrang geven aan andere.
     HelperImages: []
     IsCorrect: 0
-  - OriginalLine: Yes, I got priority from the Left
+  - OriginalLine: Yes, I got priority from the left.
     TranslatedLine: Ja, Ik heb voorrang van links en rechts
     HelperImages: []
     IsCorrect: 1
-  - OriginalLine: Yes, I got priority from the right
+  - OriginalLine: Yes, I got priority from the right.
     TranslatedLine: Ja, Ik heb voorrang van rechts
     HelperImages: []
     IsCorrect: 0
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
+  _rotationCount: 0
 --- !u!1001 &7607769674345470414
 PrefabInstance:
   m_ObjectHideFlags: 0

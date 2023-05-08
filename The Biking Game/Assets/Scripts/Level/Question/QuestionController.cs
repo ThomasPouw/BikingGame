@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEditor;
 using TMPro;
 
 
@@ -10,8 +10,9 @@ public class QuestionController : MonoBehaviour
 {
     [SerializeField] private BaseQuestion _blockQuestion;
     [SerializeField] private NavMeshAgent _navMeshAgent;
-    public BaseQuestion BlockQuestion{set {_blockQuestion = value;} get{return _blockQuestion;}}
-    [SerializeField] private GameObject _questionPanel;
+    public BaseQuestion BlockQuestion{set {Debug.Log(this+ " "+value);
+        _blockQuestion = value;} get{return _blockQuestion;}}
+    [SerializeField] private GameObject _questionScreen;
     [SerializeField] private GameObject _answerHolderPanel;
     [SerializeField] private ImageStorage _imageStorage;
     private GameObject _answerPanel;
@@ -19,20 +20,19 @@ public class QuestionController : MonoBehaviour
     private PointComboUI _pointComboUI;
     [SerializeField]private bool _allowedToVote;
 
+    //Animation and Sound
+    private Animator _gameScreenAnimator;
+    private AudioSource _gameScreenSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        //if(_questionPanel != null){
-        //    _questionPanel.SetActive(false);
-        //    _navMeshAgent.isStopped = false;
-        //}
-        
         _allowedToVote = true;
     }
 
     void OnTriggerEnter(Collider other) {
+        //_blockQuestion = other.gameObject.GetComponentInChildren<BaseQuestion>();
         if(_blockQuestion != null){
-            Debug.Log(gameObject);
             _navMeshAgent.isStopped = true;
             SetQuestionUI();
         }
@@ -41,20 +41,44 @@ public class QuestionController : MonoBehaviour
         Debug.Log(gameObject);
         if(GameObject.Find("BikeOperator") != null){
             _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
-            _questionPanel = GameObject.Find("QuestionScreen");
+            _questionScreen = GameObject.Find("QuestionScreen");
             _answerHolderPanel = GameObject.Find("AnswerHolder");
-            Transform question = transform.parent.parent.parent.Find("Question");
-            if(question != null)
+            Transform question = _questionScreen.transform.Find("Question");
+            if(question != null){
                 _blockQuestion = question.GetComponentInChildren<BaseQuestion>();
-            _questionText = _questionPanel.transform.Find("Question").GetComponent<TMP_Text>();
+                _questionText = question.GetComponent<TMP_Text>();
+            }
             _pointComboUI = GameObject.Find("PointsSystem").GetComponent<PointComboUI>();
             _imageStorage = GameObject.Find("Storage").GetComponent<ImageStorage>();
-            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();   
+            _navMeshAgent = GameObject.Find("BikeOperator").GetComponent<NavMeshAgent>();
+            _gameScreenAnimator = _questionScreen.transform.parent.GetComponent<Animator>();
+            _gameScreenSource = _questionScreen.transform.parent.GetComponent<AudioSource>();
         }
     }
-    public void isCorrectAnswer(Entry answer){
+    IEnumerator isCorrectAnswer(Entry answer){
         _allowedToVote = false;
+        _gameScreenAnimator.SetTrigger("AnswerRise");
+        yield return new WaitForSeconds(_gameScreenAnimator.GetCurrentAnimatorStateInfo(0).length);
+        int index = -1;
+        for (int i = 0; i < _blockQuestion.Answers.Length; i++)
+        {
+            if(_blockQuestion.Answers[i].IsCorrect){
+                index = i;
+            }
+        }
+        
+        if(index == 0){
+            _gameScreenAnimator.SetTrigger("LeftCorrect");
+        }
+        else if(index == 1){
+            _gameScreenAnimator.SetTrigger("CenterCorrect");
+        }
+        else{
+            _gameScreenAnimator.SetTrigger("RightCorrect");
+        }
         if(answer.IsCorrect){
+            Debug.Log("Here!");
+            Debug.Log(answer.OriginalLine);
             _pointComboUI.Combo +=1;
             _pointComboUI.Points +=_blockQuestion.PointsReceived;
         }
@@ -62,13 +86,15 @@ public class QuestionController : MonoBehaviour
             _pointComboUI.Combo -= _blockQuestion.QuestionWrongPunishment;
             //reduce 1 from combo
         }
+        yield return new WaitForSeconds(_gameScreenAnimator.GetCurrentAnimatorStateInfo(0).length);
+        _gameScreenAnimator.SetTrigger("Vanish");
         _navMeshAgent.isStopped = false;
-        _questionPanel.SetActive(false);
+        _questionScreen.SetActive(false);
         _blockQuestion.QuestionVehicleMovement(StartEnd.End);
     }
     public void SetQuestionUI(){
         if(_blockQuestion != null){
-            _questionPanel.SetActive(true);
+            _questionScreen.SetActive(true);
             _blockQuestion.Question = new Translation().TranslateSentence(_blockQuestion.Question.OriginalLine, "Question");
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             for (int i = 0; i < _blockQuestion.Answers.Length; i++)
@@ -84,16 +110,14 @@ public class QuestionController : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if(_blockQuestion != null && _allowedToVote){
             if(Input.GetKey(KeyCode.Alpha1) && _blockQuestion.Answers[0] != null){
-                Debug.Log("1");
-            isCorrectAnswer(_blockQuestion.Answers[0]);
+                StartCoroutine(isCorrectAnswer(_blockQuestion.Answers[0]));
             }
             else if(Input.GetKey(KeyCode.Alpha2) && _blockQuestion.Answers[1] != null){
-                Debug.Log("2");
-            isCorrectAnswer(_blockQuestion.Answers[1]);
+                StartCoroutine(isCorrectAnswer(_blockQuestion.Answers[1]));
             }
             else if(Input.GetKey(KeyCode.Alpha3) && _blockQuestion.Answers[2] != null){
-                Debug.Log("3");
-            isCorrectAnswer(_blockQuestion.Answers[2]);
+
+                StartCoroutine(isCorrectAnswer(_blockQuestion.Answers[2]));
             }
         }
     }
@@ -104,11 +128,20 @@ public class QuestionController : MonoBehaviour
         Transform P = _answerHolderPanel.transform.GetChild(i);
         P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
         P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
-        Image[] _helperImages = P.Find("ImageHolder").GetComponentsInChildren<Image>();
+        Image[] _helperPictures = P.Find("ImageHolder").GetComponentsInChildren<Image>();
         if(_blockQuestion.Answers[i].HelperImages != null){
-            for (int ii = 0; ii < _blockQuestion.Answers[i].HelperImages.Length; ii++)
+            
+            for (int ii = 0; ii < _helperPictures.Length; ii++)
             {
-                _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperImages[ii]);
+                Debug.Log(_helperPictures[ii].gameObject);
+                if(_blockQuestion.Answers[i].HelperImages.Length > ii){
+                    _helperPictures[ii].gameObject.SetActive(true);
+                    _imageStorage.DownloadPicture(_blockQuestion.Answers[i].HelperImages[ii], _helperPictures[ii]);
+                }
+                else{
+                    _helperPictures[ii].gameObject.SetActive(false);
+                }
+                
                 //texture.LoadRawTextureData(ImageStorage.Images[_blockQuestion.Answers[i].HelperImages[ii]]);
                 //_helperImages[ii].defaultMaterial.mainTexture = texture;
             //Need way to load images

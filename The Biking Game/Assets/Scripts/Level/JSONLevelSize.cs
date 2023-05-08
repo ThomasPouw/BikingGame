@@ -10,6 +10,7 @@ public class JSONLevelSize
     public int zMax;
     public float blockSize;
     public List<JsonBlockInfo> alreadyPlacedTilesJSON = new List<JsonBlockInfo>();
+    public float totalPossiblePoints;
     public JSONLevelSize(LevelSize levelSize){
         levelName = levelSize.levelName;
         xMax = levelSize.xMax;
@@ -21,5 +22,6 @@ public class JSONLevelSize
             jsonBlockInfo.Add(levelSize.tiles[i].getJsonBlockInfo());
         }
         alreadyPlacedTilesJSON = jsonBlockInfo;
+        totalPossiblePoints = levelSize.totalPossiblePoints;
     }
 }

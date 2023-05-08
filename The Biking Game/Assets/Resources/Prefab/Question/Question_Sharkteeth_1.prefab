@@ -856,15 +856,15 @@ MonoBehaviour:
     HelperImages: []
     IsCorrect: 0
   Answers:
-  - OriginalLine: The Car, As it has sharks teeth
+  - OriginalLine: The Car, As it has sharks teeth.
     TranslatedLine: De Auto, want hij heeft haaientanden
     HelperImages: []
     IsCorrect: 0
-  - OriginalLine: You, the Cyclists, as you got priority on all cars.
+  - OriginalLine: Me, as you got priority on all cars.
     TranslatedLine: Jij, De fietser, want jij hebt voorrang op alle auto's
     HelperImages: []
     IsCorrect: 0
-  - OriginalLine: You, the Cyclists, as the car has sharks teeth on his road.
+  - OriginalLine: Me, as the car has sharks teeth on his road.
     TranslatedLine: Jij, De fietser, want de auto heeft haaientanden op zijn weg.
     HelperImages: []
     IsCorrect: 1
@@ -883,6 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
+  _rotationCount: 0
 --- !u!114 &768752279828468560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockQuestion: {fileID: 0}
   _navMeshAgent: {fileID: 0}
-  _questionPanel: {fileID: 0}
+  _questionScreen: {fileID: 0}
   _answerHolderPanel: {fileID: 0}
   _imageStorage: {fileID: 0}
   _questionText: {fileID: 0}

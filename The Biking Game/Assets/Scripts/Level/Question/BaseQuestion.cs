@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.AI;
 
 public abstract class BaseQuestion : MonoBehaviour
@@ -14,7 +15,9 @@ public abstract class BaseQuestion : MonoBehaviour
     [SerializeField] public Vehicle[] vehicles;
 
     private void Start() {
-        transform.transform.Find("Waypoint").GetComponentInChildren<QuestionController>().BlockQuestion = this;
+        //Debug.Log("Without Love");
+        //Debug.Log(transform.transform.Find("Waypoint"));
+        //transform.transform.Find("Waypoint").GetComponentInChildren<QuestionController>().BlockQuestion = this;
         foreach(Vehicle vehicle in vehicles){
             vehicle.navMeshAgent.isStopped = true;
         }
@@ -22,6 +25,7 @@ public abstract class BaseQuestion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Without Updated Love");
     }
     public void QuestionVehicleMovement(StartEnd startEnd){
         foreach (Vehicle vehicle in vehicles)

@@ -5,5 +5,9 @@ using UnityEngine.EventSystems;
 
 public class CanvasPanelDestroy : MonoBehaviour
 {
-    
+    private void OnMouseDown() {
+        if(Input.GetButtonDown("Fire2")){
+            Destroy(gameObject.transform.parent);
+        }
+    }
 }

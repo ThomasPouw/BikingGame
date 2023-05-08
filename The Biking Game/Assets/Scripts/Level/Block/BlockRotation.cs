@@ -5,11 +5,19 @@ using UnityEngine;
 public class BlockRotation : MonoBehaviour
 {
     [SerializeField]public Rotation _rotation;
+    [SerializeField]private int _rotationCount;
     public Rotation GetRotation(){
         return _rotation;
     }
     public void SetRotation(Rotation rotation){
         _rotation = rotation;
+        rotateBlock();
+    }
+    public void SetRotation(){
+        _rotationCount++;
+        if(_rotationCount == 4)
+        _rotationCount = 0;
+        _rotation = (Rotation)_rotationCount;
         rotateBlock();
     }
     private void rotateBlock(){

@@ -43,8 +43,12 @@ public class VehicleMovement : MonoBehaviour
                     WayPoints = hit.collider.gameObject;
                     vehiclePath = hit.collider.gameObject.transform.Find("Waypoint").GetComponentInChildren<VehiclePath>();
                     BaseQuestion BQ = hit.collider.transform.Find("Question").GetComponentInChildren<BaseQuestion>();
+                    Debug.Log(BQ);
                     if(BQ != null){
+                        Debug.Log(hit.collider.gameObject + " "+hit.collider.gameObject.transform.Find("Waypoint").GetComponentInChildren<QuestionController>());
+                        hit.collider.gameObject.transform.Find("Waypoint").GetComponentInChildren<QuestionController>().BlockQuestion = BQ;
                         BQ.QuestionVehicleMovement(StartEnd.Start);
+                        
                     }
                     WayPointCount = -1;
                 }

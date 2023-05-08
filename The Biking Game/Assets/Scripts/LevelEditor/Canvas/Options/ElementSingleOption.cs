@@ -21,9 +21,10 @@ public class ElementSingleOption : MonoBehaviour
         if(Physics.Raycast(Input.mousePosition, Vector3.down, out hit)){
             Destroy(hit.collider);
         }
-        Instantiate(BaseBlock, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+        GameObject baseBlock =Instantiate(BaseBlock, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
         //BaseBlock.GetComponent<DragAndDropObject>().UpdateBlockHold();
-        BaseBlock.GetComponent<DragAndDropObject>().enabled = true;
-        BaseBlock.GetComponent<CanvasMenuAppear>().enabled = false;
+        baseBlock.transform.position = new Vector3(baseBlock.transform.position.x, 42, baseBlock.transform.position.z);
+        baseBlock.AddComponent<DragAndDropObject>();
+        
     }
 }

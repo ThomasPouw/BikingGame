@@ -6,7 +6,8 @@ using TMPro;
 
 public class LevelSize : MonoBehaviour
 {
-    public LevelStorage levelStorage;
+    
+    //public LevelStorage levelStorage;
     public string levelName;
     public int xMax;
     public int zMax;
@@ -15,11 +16,13 @@ public class LevelSize : MonoBehaviour
     public List<BlockInfo> tiles = new List<BlockInfo>();
     public List<JsonBlockInfo> alreadyPlacedTilesJSON = new List<JsonBlockInfo>();
     //public List<BlockInfo> alreadyPlacedTiles = new List<BlockInfo>();
+    public float totalPossiblePoints;
     public NavMeshSurface surfaces;
 
-    [Header("LevelEditor Only")]
+    [Header("LevelEditor Only info")]
     public TMP_InputField xMaxText;
     public TMP_InputField zMaxText;
+    public bool panelActivate = false;
     
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,7 @@ public class LevelSize : MonoBehaviour
     {
         xMax = int.Parse(xMaxText.text);
         zMax = int.Parse(zMaxText.text);
+        panelActivate = true;
         MakeLevel();
     }
     public void MakeLevel()
@@ -51,8 +55,7 @@ public class LevelSize : MonoBehaviour
             {
                 BlockInfo blockInfo = null;
                 GameObject tile;
-                Debug.Log(tiles);
-                Debug.Log(tiles.Find(t => t.X == x && t.Z == z));
+
                 if(tiles.Find(t => t.X == x && t.Z == z) == null)
                 {
                     JsonBlockInfo APTJSON = alreadyPlacedTilesJSON.Find(t => t.x == x && t.z == z);
@@ -67,10 +70,19 @@ public class LevelSize : MonoBehaviour
                         tile.transform.parent = transform;
                     }
                     tiles.Add(blockInfo);
-                }  
+                }
+
             }
         }
         StartCoroutine(BuildNavmesh());
+        if(panelActivate){
+            foreach(BlockInfo blockInfo in tiles){
+                if(blockInfo.tile.GetComponent<CanvasMenuAppear>() == null)
+                {
+                    blockInfo.tile.AddComponent<CanvasMenuAppear>();
+                }
+            }
+        }
     }
     IEnumerator BuildNavmesh(){
         yield return new WaitForSeconds(0.1f);
@@ -86,6 +98,7 @@ public class LevelSize : MonoBehaviour
         MakeLevel();
     }
     public BlockInfo MakeBlock(JsonBlockInfo jsonBlockInfo, int x, int z){
+        Debug.Log(jsonBlockInfo.tileName);
         GameObject tile =tile = Instantiate((GameObject)Resources.Load("Prefab/Roads/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
         tile.name = jsonBlockInfo.tileName;
         GameObject _wayPoints = null;
@@ -107,4 +120,5 @@ public class LevelSize : MonoBehaviour
         tile.transform.parent = transform;
         return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.blockRotation, jsonBlockInfo.wayPointRotation, jsonBlockInfo.questionRotation);
     }
+    
 }

@@ -28,6 +28,7 @@ public class TranslationStorage : MonoBehaviour
       
       if(AllLanguages == null){
         AllLanguages = new List<Language>();
+        LanguageOptions = new List<string>();
         CurrentLanguage = new Dictionary<string, Dictionary<string, Entry>>();
         ReadAllLanguages();
         //selectCurrentLanguage("Simple Dutch");
@@ -37,7 +38,7 @@ public class TranslationStorage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(CurrentLanguage.ToString());
+        //Debug.Log(CurrentLanguage.ToString());
     }
     public void selectCurrentLanguage(string languageName)
     {
@@ -68,8 +69,9 @@ public class TranslationStorage : MonoBehaviour
           {
               Language loadLanguage = JsonUtility.FromJson<Language>(child.GetRawJsonValue());
               AllLanguages.Add(loadLanguage);
+              Debug.Log(loadLanguage.LanguageName);
               LanguageOptions.Add(loadLanguage.LanguageName);
-
+              Debug.Log(LanguageOptions.Count);
           }
           //selectCurrentLanguage(AllLanguages[0].LanguageName);
         }
@@ -81,6 +83,9 @@ public class TranslationStorage : MonoBehaviour
     }
     public void writeNewTranslation(string translationFile, string languageName){
         reference.Child("translation/"+languageName).SetRawJsonValueAsync(translationFile);
+    }
+    public void deleteTranslation(string languageName){
+        reference.Child("translation/"+languageName).RemoveValueAsync();
     }
     public void MakeDictionaryForCurrent(Language currentListLanguage){
       Dictionary<string, Entry> _translationDictionary = new Dictionary<string, Entry>();

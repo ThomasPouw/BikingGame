@@ -77,6 +77,32 @@ public class VehiclePath : MonoBehaviour
             }
         }
     }
+    public void EditorMeshMaker()
+    {
+        var mesh = new Mesh();
+        mesh.name = gameObject.name;
+        mesh.colors = new []{Color.blue};
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> indices = new List<int>();
+        for (int i = 0; i < Waypoints.Count; i++)
+        {
+            vertices.Add(Waypoints[i].transform.position);
+            indices.Add(i);
+            if(i != 0 || i == Waypoints.Count-1)
+            indices.Add(i);
+        }
+        Debug.Log(Waypoints.Count);
+        foreach (var item in indices)
+        {
+            Debug.Log(item);
+        }
+        mesh.SetVertices(vertices);
+        mesh.SetIndices(indices, MeshTopology.Lines, 0);
+        Debug.Log("Here!");
+        Debug.Log(mesh.name);
+        GetComponent<MeshFilter>().mesh = mesh;
+
+    }
 }
 
 

@@ -8,11 +8,11 @@ public class BlockInfo
     public float X;
     public float Z;
     //[SerializeField] private BlockRotation _blockRotation;
-    [SerializeField] private GameObject _wayPoints;
-    [SerializeField] private GameObject _baseQuestion;
-    [SerializeField] private Rotation _blockRotation;
-    [SerializeField] private Rotation _waypointRotation;
-    [SerializeField] private Rotation _questionRotation;
+    [SerializeField] public GameObject _wayPoints;
+    [SerializeField] public GameObject _baseQuestion;
+    [SerializeField] public Rotation _blockRotation;
+    [SerializeField] public Rotation _waypointRotation;
+    [SerializeField] public Rotation _questionRotation;
     public GameObject tile;
     public BlockInfo(GameObject Tile, float x, float z){
         tile= Tile;
@@ -32,14 +32,14 @@ public class BlockInfo
     
     public JsonBlockInfo getJsonBlockInfo(){
         JsonBlockInfo jsonBlockInfo = new JsonBlockInfo();
-        jsonBlockInfo.blockRotation = _blockRotation;
+        jsonBlockInfo.blockRotation = tile.GetComponent<BlockRotation>()._rotation;
         if(_baseQuestion != null){
             jsonBlockInfo.baseQuestionName = _baseQuestion.name;
-            jsonBlockInfo.questionRotation = _questionRotation;
+            jsonBlockInfo.questionRotation = _baseQuestion.GetComponent<BlockRotation>()._rotation;
         }
         if(_wayPoints != null){
             jsonBlockInfo.wayPointName = _wayPoints.name;
-            jsonBlockInfo.wayPointRotation = _waypointRotation;
+            jsonBlockInfo.wayPointRotation = _wayPoints.GetComponent<BlockRotation>()._rotation;
         }
         jsonBlockInfo.tileName = tile.name;
         

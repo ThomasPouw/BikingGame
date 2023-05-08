@@ -34,8 +34,7 @@ public class ImageStorage : MonoBehaviour
         try{
             Texture2D texture = new Texture2D(50, 50);
         if(Images.ContainsKey(imageName)){
-            texture.LoadImage(Images[imageName]);
-            image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+            StartCoroutine(SetPicture(texture, imageName, image));
         }
         else{
             StorageReference pathReference = storage.GetReference("images/"+ imageName);
@@ -48,13 +47,11 @@ public class ImageStorage : MonoBehaviour
                     // Uh-oh, an error occurred!
                 }
                 else {
-                    Debug.Log(task.Result);
                     Debug.Log("DownloadPicture: "+imageName);
                     Images.Add(imageName, task.Result);
+                    Debug.Log(imageName);
                     Debug.Log("Finished downloading!");
-                    texture.LoadImage(Images[imageName]);
-                    
-                    image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+                    StartCoroutine(SetPicture( texture, imageName, image));
                     //image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
                     //texture.Apply();
                 }
@@ -64,5 +61,10 @@ public class ImageStorage : MonoBehaviour
         catch(Exception E){
             Debug.LogError(E);
         }
+    }
+    IEnumerator SetPicture(Texture2D texture, string imageName, Image image){
+        texture.LoadImage(Images[imageName]);      
+        image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+        yield return new WaitForSeconds(0.5f);
     }
 }

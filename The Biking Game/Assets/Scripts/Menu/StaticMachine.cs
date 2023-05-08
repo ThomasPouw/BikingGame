@@ -13,6 +13,8 @@ public class StaticMachine : MonoBehaviour
     }
     private void Awake() {
         DontDestroyOnLoad(gameObject);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
     void Start()
     {

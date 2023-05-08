@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4765931374407321785}
   - component: {fileID: 4716417458780258735}
   - component: {fileID: 8343988373776045179}
-  - component: {fileID: 5117935887821208178}
+  - component: {fileID: -1255489961310745912}
   m_Layer: 0
   m_Name: Roundabout
   m_TagString: Untagged
@@ -133,20 +133,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
---- !u!114 &5117935887821208178
-MonoBehaviour:
+  _rotationCount: 0
+--- !u!64 &-1255489961310745912
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7732958304839213550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98276fea4fb77dc48a12e7a1d2e366f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupStorage: {fileID: 0}
-  popUpPanel: {fileID: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7713216282114081814, guid: 37b7e7c4e5f4f684fa111d6256264512, type: 3}
 --- !u!1 &7795163530798993454
 GameObject:
   m_ObjectHideFlags: 0

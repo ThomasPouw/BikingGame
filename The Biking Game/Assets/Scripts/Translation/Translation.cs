@@ -6,19 +6,24 @@ public class Translation
 {
     public TextAsset jsonTest;
     // Start is called before the first frame update
-    void Start()
+    public void ImportLanguage(Language JSONLanguage)
     {
-        
+        new TranslationStorage().writeNewTranslation(JsonUtility.ToJson(JSONLanguage), JSONLanguage.LanguageName);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void EditLanguage(Language JSONLanguage, string EditLanguageName)
     {
-        
+        if(JSONLanguage.LanguageName == EditLanguageName){
+            new TranslationStorage().writeNewTranslation(JsonUtility.ToJson(JSONLanguage), JSONLanguage.LanguageName);
+        }
+        else
+        {
+            new TranslationStorage().deleteTranslation(EditLanguageName);
+            new TranslationStorage().writeNewTranslation(JsonUtility.ToJson(JSONLanguage), JSONLanguage.LanguageName);
+        }
     }
-    public void ImportLanguage(TextAsset JSONLanguage)
+    public void DeleteLanguage(string DeleteLanguageName)
     {
-        new TranslationStorage().writeNewTranslation(JSONLanguage.text, JSONLanguage.name);
+        new TranslationStorage().deleteTranslation(DeleteLanguageName);
     }
     /*public void DeleteLanguage(string languageName)
     {
@@ -31,6 +36,7 @@ public class Translation
     public Entry TranslateSentence(string sentence, string dictionaryType){
         return TranslationStorage.CurrentLanguage[dictionaryType][sentence];
     }
+
 }
 [System.Serializable]
 public class Language

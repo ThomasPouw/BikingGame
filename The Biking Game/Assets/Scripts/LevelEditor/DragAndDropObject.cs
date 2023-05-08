@@ -24,8 +24,8 @@ public class DragAndDropObject : MonoBehaviour
             transform.parent = GameObject.Find("LevelEditor").transform;
             Destroy(replaced);
             levelSize.tiles.RemoveAt(index+1);
-            GetComponent<CanvasMenuAppear>().enabled = true;
-            enabled = false;
+            gameObject.AddComponent<CanvasMenuAppear>();
+            Destroy(this);
         }
     }
     private void Update() {

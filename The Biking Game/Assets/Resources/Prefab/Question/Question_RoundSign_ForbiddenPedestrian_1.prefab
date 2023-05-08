@@ -54,15 +54,15 @@ MonoBehaviour:
     HelperImages: []
     IsCorrect: 0
   Answers:
-  - OriginalLine: Forbidden for pedestrians
-    TranslatedLine: Verboden voor voetgangers
+  - OriginalLine: Forbidden for pedestrians.
+    TranslatedLine: Verboden voor voetgangers.
     HelperImages: []
     IsCorrect: 0
-  - OriginalLine: Closed for Pedestrians
+  - OriginalLine: Closed for Pedestrians.
     TranslatedLine: Gesloten voor voetgangers
     HelperImages: []
     IsCorrect: 1
-  - OriginalLine: Mandatory crosswalk
+  - OriginalLine: Mandatory crosswalk.
     TranslatedLine: Verplichte zebrapad
     HelperImages: []
     IsCorrect: 0
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 0
+  _rotationCount: 0
 --- !u!1001 &4207445847028712086
 PrefabInstance:
   m_ObjectHideFlags: 0
