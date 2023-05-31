@@ -69,9 +69,7 @@ public class TranslationStorage : MonoBehaviour
           {
               Language loadLanguage = JsonUtility.FromJson<Language>(child.GetRawJsonValue());
               AllLanguages.Add(loadLanguage);
-              Debug.Log(loadLanguage.LanguageName);
               LanguageOptions.Add(loadLanguage.LanguageName);
-              Debug.Log(LanguageOptions.Count);
           }
           //selectCurrentLanguage(AllLanguages[0].LanguageName);
         }

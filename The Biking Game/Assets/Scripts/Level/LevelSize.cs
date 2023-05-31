@@ -18,16 +18,18 @@ public class LevelSize : MonoBehaviour
     //public List<BlockInfo> alreadyPlacedTiles = new List<BlockInfo>();
     public float totalPossiblePoints;
     public NavMeshSurface surfaces;
+    public LoadingScreen loadingScreen;
 
     [Header("LevelEditor Only info")]
     public TMP_InputField xMaxText;
     public TMP_InputField zMaxText;
+    public bool skipMakeLevel = false;
     public bool panelActivate = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        MakeLevel();
+        //MakeLevel();
     }
 
     // Update is called once per frame
@@ -36,9 +38,11 @@ public class LevelSize : MonoBehaviour
     }
     public void SetSize()
     {
-        xMax = int.Parse(xMaxText.text);
-        zMax = int.Parse(zMaxText.text);
+        xMax = xMaxText.text != "" ? int.Parse(xMaxText.text) : 0;
+        zMax = zMaxText.text != "" ? int.Parse(zMaxText.text) : 0;
         panelActivate = true;
+        if(skipMakeLevel)
+        return;
         MakeLevel();
     }
     public void MakeLevel()
@@ -49,7 +53,7 @@ public class LevelSize : MonoBehaviour
                 Destroy(t.tile);
             }
         }
-        Debug.Log(tiles.RemoveAll(s => s == null));
+        tiles.RemoveAll(t => t.X > xMax-1 || t.Z > zMax-1);
         for(int x = 0; x < xMax; x++){
             for (int z = 0; z < zMax; z++)
             {
@@ -75,7 +79,7 @@ public class LevelSize : MonoBehaviour
             }
         }
         StartCoroutine(BuildNavmesh());
-        if(panelActivate){
+        if(panelActivate || skipMakeLevel){
             foreach(BlockInfo blockInfo in tiles){
                 if(blockInfo.tile.GetComponent<CanvasMenuAppear>() == null)
                 {
@@ -87,38 +91,53 @@ public class LevelSize : MonoBehaviour
     IEnumerator BuildNavmesh(){
         yield return new WaitForSeconds(0.1f);
         surfaces.BuildNavMesh();
+        if(loadingScreen != null){
+            loadingScreen.EverythingLoaded = true;
+        }
     }
     public void SetValue(JSONLevelSize jsonLevelSize)
     {
         levelName = jsonLevelSize.levelName;
         alreadyPlacedTilesJSON = jsonLevelSize.alreadyPlacedTilesJSON;
+        Debug.Log("jsonLevelSize.alreadyPlacedTilesJSON: "+jsonLevelSize.alreadyPlacedTilesJSON.Count);
         blockSize = jsonLevelSize.blockSize;
         xMax = jsonLevelSize.xMax;
         zMax = jsonLevelSize.zMax;
         MakeLevel();
     }
     public BlockInfo MakeBlock(JsonBlockInfo jsonBlockInfo, int x, int z){
+        GameObject tile;
         Debug.Log(jsonBlockInfo.tileName);
-        GameObject tile =tile = Instantiate((GameObject)Resources.Load("Prefab/Roads/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
-        tile.name = jsonBlockInfo.tileName;
-        GameObject _wayPoints = null;
-        GameObject _baseQuestion = null;
-        if(jsonBlockInfo.baseQuestionName != ""){
-            _baseQuestion = (GameObject)Instantiate(Resources.Load("Prefab/Question/"+ jsonBlockInfo.baseQuestionName), tile.transform.Find("Question"));
-            _baseQuestion.name = jsonBlockInfo.baseQuestionName;
-            _baseQuestion.transform.parent = tile.transform.Find("Question").transform;
-            _baseQuestion.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.questionRotation);
+        if(jsonBlockInfo.tileName.Contains("Deco")){
+            tile = Instantiate((GameObject)Resources.Load("Prefab/Decoration/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
+            tile.name = jsonBlockInfo.tileName;
+            tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
+            tile.transform.parent = transform;
+            return new BlockInfo(tile,jsonBlockInfo.blockRotation, x, z);
         }
-        if(jsonBlockInfo.wayPointName != ""){
-            _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/Waypoint/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
-            _wayPoints.name = jsonBlockInfo.wayPointName;
-            _wayPoints.transform.parent = tile.transform.Find("Waypoint").transform;
-            _wayPoints.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.wayPointRotation);
+        else{
+            tile= Instantiate((GameObject)Resources.Load("Prefab/Roads/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
+            tile.name = jsonBlockInfo.tileName;
+            GameObject _wayPoints = null;
+            GameObject _baseQuestion = null;
+            if(jsonBlockInfo.baseQuestionName != ""){
+                _baseQuestion = (GameObject)Instantiate(Resources.Load("Prefab/Question/"+ jsonBlockInfo.baseQuestionName), tile.transform.Find("Question"));
+                _baseQuestion.name = jsonBlockInfo.baseQuestionName;
+                _baseQuestion.transform.parent = tile.transform.Find("Question").transform;
+                _baseQuestion.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.questionRotation);
+            }
+            if(jsonBlockInfo.wayPointName != ""){
+                _wayPoints = (GameObject)Instantiate(Resources.Load("Prefab/Waypoint/"+ jsonBlockInfo.wayPointName), tile.transform.Find("Waypoint"));
+                _wayPoints.name = jsonBlockInfo.wayPointName;
+                _wayPoints.transform.parent = tile.transform.Find("Waypoint").transform;
+                _wayPoints.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.wayPointRotation);
+            }
+        
+            tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
+            tile.transform.parent = transform;
+            return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.blockRotation, jsonBlockInfo.wayPointRotation, jsonBlockInfo.questionRotation);
         }
         
-        tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
-        tile.transform.parent = transform;
-        return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.blockRotation, jsonBlockInfo.wayPointRotation, jsonBlockInfo.questionRotation);
     }
     
 }

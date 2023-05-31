@@ -14,5 +14,11 @@ public class SceneLoad : MonoBehaviour
     public void LoadLevelEditor(){
         SceneManager.LoadScene("LevelEditor");
     }
-    
+    public void LoadLevelEditor(MenuInfo menuInfo){
+        StaticMachine.menuInfo.SetValue(menuInfo);
+        SceneManager.LoadScene("LevelEditor");
+    }
+    public void LoadMenu(){
+        SceneManager.LoadScene("Menu");
+    }
 }

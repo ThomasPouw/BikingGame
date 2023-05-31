@@ -8,14 +8,14 @@ using System;
 
 public class ImageStorage : MonoBehaviour
 {
-    public static Dictionary<string, byte[]> Images;
+    public static Dictionary<string, Sprite> Images;
     FirebaseStorage storage;
     StorageReference storageRef;
     // Start is called before the first frame update
     void Start()
     {
         if(Images == null){
-            Images = new Dictionary<string, byte[]>();
+            Images = new Dictionary<string, Sprite>();
         }
         storage = FirebaseStorage.DefaultInstance;
         storageRef = storage.GetReferenceFromUrl("gs://bikinggame-3cabe.appspot.com");
@@ -30,16 +30,17 @@ public class ImageStorage : MonoBehaviour
     public void UploadPicture(string file){
         //Maybe?
     }
-    public void DownloadPicture(string imageName, Image image){
+    public async void DownloadPicture(string imageName, Image image){
         try{
-            Texture2D texture = new Texture2D(50, 50);
+            Texture2D texture = new Texture2D(200, 200);
         if(Images.ContainsKey(imageName)){
-            StartCoroutine(SetPicture(texture, imageName, image));
+            image.sprite = Images[imageName];
         }
         else{
             StorageReference pathReference = storage.GetReference("images/"+ imageName);
             const long maxAllowedSize = 1 * 1024 * 1024;
-            pathReference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
+            DateTime time = DateTime.Now;
+            await pathReference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
                 if (task.IsFaulted || task.IsCanceled) 
                 {
                     Debug.LogException(task.Exception);
@@ -47,13 +48,13 @@ public class ImageStorage : MonoBehaviour
                     // Uh-oh, an error occurred!
                 }
                 else {
-                    Debug.Log("DownloadPicture: "+imageName);
-                    Images.Add(imageName, task.Result);
-                    Debug.Log(imageName);
-                    Debug.Log("Finished downloading!");
-                    StartCoroutine(SetPicture( texture, imageName, image));
-                    //image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
-                    //texture.Apply();
+                    Debug.Log(imageName+ ": "+ (DateTime.Now - time).ToString());
+                    if(!Images.ContainsKey(imageName)){
+                        StartCoroutine(SetPicture(texture, imageName, image, task.Result));
+                    }
+                    else{
+                        image.sprite = Images[imageName];
+                    }
                 }
             });
         }
@@ -62,9 +63,13 @@ public class ImageStorage : MonoBehaviour
             Debug.LogError(E);
         }
     }
-    IEnumerator SetPicture(Texture2D texture, string imageName, Image image){
-        texture.LoadImage(Images[imageName]);      
-        image.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
-        yield return new WaitForSeconds(0.5f);
+    public IEnumerator SetPicture(Texture2D texture, string imageName, Image image, byte[] result){
+        texture.LoadImage(result);      
+        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width/2, texture.height/2));
+        Images.Add(imageName, sprite);
+        Debug.Log(imageName+": " +result.Length);
+        image.sprite = sprite;
+        yield return null;
+        //yield return new WaitForSeconds(0.5f);
     }
 }

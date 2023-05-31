@@ -15,7 +15,7 @@ public class SpawnElement : MonoBehaviour
     public void Spawn(){
         if(Parent != null){
             GameObject _spawn = Instantiate(SpawnPart, Parent.transform.Find(_gameObjectlocation).transform);
-            Button btn = GameObject.Find("OptionMenu/"+_gameObjectlocation).transform.GetChild(0).GetComponent<Button>();
+            Button btn = GameObject.Find("OptionMenu/"+_gameObjectlocation).transform.GetChild(1).GetComponent<Button>();
             
             btn.onClick.AddListener(() => _spawn.GetComponent<BlockRotation>().SetRotation());
             _spawn.name = SpawnPart.name;

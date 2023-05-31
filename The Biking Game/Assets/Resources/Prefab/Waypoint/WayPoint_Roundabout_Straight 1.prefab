@@ -161,10 +161,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockQuestion: {fileID: 0}
   _navMeshAgent: {fileID: 0}
-  _questionPanel: {fileID: 0}
+  _questionScreen: {fileID: 0}
   _answerHolderPanel: {fileID: 0}
   _imageStorage: {fileID: 0}
+  _questionText: {fileID: 0}
   _allowedToVote: 0
+  _gameScreenAnimator: {fileID: 0}
+  _bikeAudio: {fileID: 0}
+  _questionAudio: {fileID: 0}
 --- !u!1 &4074112022375175028
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,10 +216,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockQuestion: {fileID: 0}
   _navMeshAgent: {fileID: 0}
-  _questionPanel: {fileID: 0}
+  _questionScreen: {fileID: 0}
   _answerHolderPanel: {fileID: 0}
   _imageStorage: {fileID: 0}
+  _questionText: {fileID: 0}
   _allowedToVote: 0
+  _gameScreenAnimator: {fileID: 0}
+  _bikeAudio: {fileID: 0}
+  _questionAudio: {fileID: 0}
 --- !u!135 &8504723378566916599
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -247,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7427758141911263796}
   - component: {fileID: 4322021071524196322}
+  - component: {fileID: 3949105446069553148}
   m_Layer: 0
   m_Name: WayPoint_Roundabout_Straight 1
   m_TagString: Untagged
@@ -304,6 +313,21 @@ MonoBehaviour:
   - {fileID: 8182875795376069510}
   _getsQuestion: 1
   _isSpecialRoad: 1
+--- !u!114 &3949105446069553148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187580787796468231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 0
+  _rotationCount: 0
+  levelEditorAudio: {fileID: 0}
 --- !u!1 &8182875795376069510
 GameObject:
   m_ObjectHideFlags: 0

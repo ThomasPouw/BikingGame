@@ -9,6 +9,7 @@ public class VehiclePath : MonoBehaviour
     [SerializeField] public List<GameObject> Waypoints;
     [SerializeField] private bool _getsQuestion;
     [SerializeField] private bool _isSpecialRoad;
+    [SerializeField] private Material lineMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -81,12 +82,12 @@ public class VehiclePath : MonoBehaviour
     {
         var mesh = new Mesh();
         mesh.name = gameObject.name;
-        mesh.colors = new []{Color.blue};
+        //mesh.colors = new []{Color.blue};
         List<Vector3> vertices = new List<Vector3>();
         List<int> indices = new List<int>();
         for (int i = 0; i < Waypoints.Count; i++)
         {
-            vertices.Add(Waypoints[i].transform.position);
+            vertices.Add(Waypoints[i].transform.localPosition);
             indices.Add(i);
             if(i != 0 || i == Waypoints.Count-1)
             indices.Add(i);
@@ -98,6 +99,7 @@ public class VehiclePath : MonoBehaviour
         }
         mesh.SetVertices(vertices);
         mesh.SetIndices(indices, MeshTopology.Lines, 0);
+        GetComponent<MeshRenderer>().material = lineMaterial;
         Debug.Log("Here!");
         Debug.Log(mesh.name);
         GetComponent<MeshFilter>().mesh = mesh;

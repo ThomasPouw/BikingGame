@@ -21,7 +21,7 @@ public class CanvasMenuAppear : MonoBehaviour
     void Start()
     {
         popupStorage = GameObject.Find("LevelEditor").GetComponent<PopupStorage>();
-        popUpPanel = (GameObject)Resources.Load(Application.dataPath + "Prefab/Menu/OptionMenu.prefab");
+        popUpPanel = (GameObject)Resources.Load("Prefab/Menu/OptionMenu");
         _graphicRaycaster= GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();  
         _eventSystem= GameObject.Find("EventSystem").GetComponent<EventSystem>();
     }
@@ -43,32 +43,51 @@ public class CanvasMenuAppear : MonoBehaviour
                 if(results.Count != 0)
                 return;
             }
+            Transform menuPosition = transform.Find("Menu");
+            if(menuPosition == null){
+                return;
+            }
             MenuPanel = Instantiate(popUpPanel);
             MenuPanel.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            //Testing.GetComponent<PanelControler>().setClickableEvent(updateClickable);
-
-            MenuPanel.transform.position = Camera.main.WorldToScreenPoint(transform.Find("Menu").position);
+            MenuPanel.transform.position = Camera.main.WorldToScreenPoint(menuPosition.position);
             ElementListAppear[] spawnElements = MenuPanel.GetComponentsInChildren<ElementListAppear>();
             AllowedElements allowedElements = GetComponent<AllowedElements>();
-            foreach (ElementListAppear spawnElement in spawnElements)
+            Transform roadPanel = MenuPanel.transform.Find("OptionMenu").Find("Roads");
+            if(roadPanel != null){
+                Button btn = roadPanel.transform.GetComponent<Button>();
+                btn.onClick.AddListener(() => GetComponent<BlockRotation>().SetRotation());
+            }
+            if(allowedElements != null){
+                foreach (ElementListAppear spawnElement in spawnElements)
             {
                 Debug.Log(spawnElement.gameObject.tag);
                 spawnElement.Parent = gameObject;
                 Button btn;
                 switch (spawnElement.gameObject.tag)
                 {
-                    case("Road"):
-                        btn = spawnElement.transform.GetComponent<Button>();
-                        btn.onClick.AddListener(() => GetComponent<BlockRotation>().SetRotation());
-                    break;
                     case("Waypoint"):
                         spawnElement.SpawnList = allowedElements.AllowedWayPoints;
+                        if(gameObject.transform.Find("Waypoint").childCount != 0){
+                            btn = spawnElement.transform.Find("Rotate").GetComponent<Button>();
+                            BlockRotation blockRotation = gameObject.transform.Find("Waypoint").GetChild(0).gameObject.GetComponent<BlockRotation>();
+                            if(blockRotation != null){
+                                btn.onClick.AddListener(() => blockRotation.SetRotation());
+                            }
+                        }
                        
                     break;
                     case("Question"):
                         spawnElement.SpawnList = allowedElements.AllowedQuestions;
+                        if(gameObject.transform.Find("Question").childCount != 0){
+                            btn = spawnElement.transform.Find("Rotate").GetComponent<Button>();
+                            BlockRotation blockRotation = gameObject.transform.Find("Question").GetChild(0).gameObject.GetComponent<BlockRotation>();
+                            if(blockRotation != null){
+                                btn.onClick.AddListener(() => blockRotation.SetRotation());
+                            }
+                        }
                     break;
                 }
+            }
             }
             popupStorage.panel = MenuPanel;    
             //Needs fixing 

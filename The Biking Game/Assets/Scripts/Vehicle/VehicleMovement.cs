@@ -9,6 +9,7 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField] VehiclePath vehiclePath;
     [SerializeField] Transform BlockChecker;
     private NavMeshAgent _navMeshAgent; 
+    [SerializeField] private WheelMovement _wheelMovement;
     private int WayPointCount = -1;
     public bool ready;
     // Start is called before the first frame update
@@ -57,7 +58,10 @@ public class VehicleMovement : MonoBehaviour
                 }
             }
             WayPointCount++;
-            _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
+            if(vehiclePath.Waypoints[WayPointCount] != null){
+                _wheelMovement.RotateWheel(_navMeshAgent.destination, vehiclePath.Waypoints[WayPointCount].transform.position);
+                _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
+            }
         }
         }
     }

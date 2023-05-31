@@ -123,6 +123,7 @@ MonoBehaviour:
   - {fileID: 3039599200429464812}
   - {fileID: 9219577773965137295}
   _getsQuestion: 1
+  _isSpecialRoad: 0
 --- !u!114 &1520387126474730216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e1413e90bc314b9cc9eed8d8423b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotation: 2
+  _rotation: 0
+  _rotationCount: 0
+  levelEditorAudio: {fileID: 0}
 --- !u!1 &2995570838489973189
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,10 +248,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockQuestion: {fileID: 0}
   _navMeshAgent: {fileID: 0}
-  _questionPanel: {fileID: 0}
+  _questionScreen: {fileID: 0}
   _answerHolderPanel: {fileID: 0}
   _imageStorage: {fileID: 0}
+  _questionText: {fileID: 0}
   _allowedToVote: 0
+  _gameScreenAnimator: {fileID: 0}
+  _bikeAudio: {fileID: 0}
+  _questionAudio: {fileID: 0}
 --- !u!135 &1910247173645684929
 SphereCollider:
   m_ObjectHideFlags: 0

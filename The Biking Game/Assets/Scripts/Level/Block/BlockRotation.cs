@@ -6,6 +6,7 @@ public class BlockRotation : MonoBehaviour
 {
     [SerializeField]public Rotation _rotation;
     [SerializeField]private int _rotationCount;
+    [SerializeField]private LevelEditorAudio levelEditorAudio;
     public Rotation GetRotation(){
         return _rotation;
     }
@@ -14,6 +15,10 @@ public class BlockRotation : MonoBehaviour
         rotateBlock();
     }
     public void SetRotation(){
+        if(levelEditorAudio == null){
+           levelEditorAudio = GameObject.Find("MainCamera").GetComponent<LevelEditorAudio>();
+        }
+        levelEditorAudio.playRotateElement();
         _rotationCount++;
         if(_rotationCount == 4)
         _rotationCount = 0;

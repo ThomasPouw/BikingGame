@@ -19,6 +19,12 @@ public class BlockInfo
         X= x;
         Z = z;
     }
+    public BlockInfo(GameObject Tile, Rotation blockRotation, float x, float z){
+        tile= Tile;
+        _blockRotation = blockRotation;
+        X= x;
+        Z = z;
+    }
     public BlockInfo(GameObject Tile, float x, float z, GameObject WayPoints, GameObject Question, Rotation blockRotation, Rotation waypointRotation, Rotation questionRotation){
         tile= Tile;
         X= x;

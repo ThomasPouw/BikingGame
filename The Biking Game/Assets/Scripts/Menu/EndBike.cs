@@ -7,7 +7,6 @@ public class EndBike : MonoBehaviour
     [SerializeField]GameObject endScreenUI;
     [SerializeField] private EndScreen _endScreen;
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Test");
         endScreenUI.SetActive(true);
         _endScreen.ShowEndScreen();
     }

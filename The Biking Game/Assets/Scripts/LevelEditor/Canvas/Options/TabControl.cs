@@ -19,6 +19,10 @@ public class TabControl : MonoBehaviour
         
     }
     public void SetActiveTab(string TabName){
+        for (var i = ObjectMenu.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(ObjectMenu.transform.GetChild(i).gameObject);
+        }
         GameObject[] baseBlocks = Resources.LoadAll<GameObject>("Prefab/"+TabName);
         foreach (GameObject baseBlock in baseBlocks)
         {

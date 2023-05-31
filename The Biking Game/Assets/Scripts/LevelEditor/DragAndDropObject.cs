@@ -14,6 +14,8 @@ public class DragAndDropObject : MonoBehaviour
     private void OnMouseUp() {
         UpdateBlockHold();
         RaycastHit hit;
+        GameObject MainCamera = GameObject.Find("MainCamera");
+        MainCamera.GetComponent<LevelEditorAudio>().playDropElement();
         if(Physics.Raycast(transform.position, Vector3.down, out hit)){
             GameObject replaced = hit.collider.gameObject;
             LevelSize levelSize = GameObject.Find("LevelEditor").GetComponent<LevelSize>();

@@ -35,21 +35,23 @@ public class LevelStorage : MonoBehaviour
     public void ReadLevels(){
         try{
             reference.Child("level/").GetValueAsync().ContinueWithOnMainThread(task => 
-        {
-            if (task.IsFaulted || task.IsCanceled) {
-                Debug.LogError(task.Exception);
-                return;
-            }
-            else if (task.IsCompleted) 
             {
-                Debug.Log("Level Mission complete!");
-                DataSnapshot snapshot = task.Result;
-                Debug.Log(snapshot.GetRawJsonValue());
-                foreach (DataSnapshot child in snapshot.Children)
-                {
-                    JSONLevelSize loadLevel = JsonUtility.FromJson<JSONLevelSize>(child.GetRawJsonValue());
-                    JSONlevelSizes.Add(loadLevel);
+                if (task.IsFaulted || task.IsCanceled) {
+                    Debug.LogError(task.Exception);
+                    return;
                 }
+                else if (task.IsCompleted) 
+                {
+                    Debug.Log("Level Mission complete!");
+                    DataSnapshot snapshot = task.Result;
+                    Debug.Log(snapshot.GetRawJsonValue());
+                    List<JSONLevelSize> tempJsonLevelSize = new List<JSONLevelSize>();
+                    foreach (DataSnapshot child in snapshot.Children)
+                    {
+                        JSONLevelSize loadLevel = JsonUtility.FromJson<JSONLevelSize>(child.GetRawJsonValue());
+                        tempJsonLevelSize.Add(loadLevel);
+                    }
+                    JSONlevelSizes = tempJsonLevelSize;
                 }
             }
         );

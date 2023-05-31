@@ -30,8 +30,8 @@ public class PointComboUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _pointText = transform.Find("PointCounter").GetComponent<TMP_Text>();
-        _comboText = transform.Find("ComboCounter").GetComponent<TMP_Text>();
+        _pointText = transform.GetChild(0).Find("PointCounter").GetComponent<TMP_Text>();
+        _comboText = transform.GetChild(0).Find("ComboCounter").GetComponent<TMP_Text>();
         _comboText.enabled = false;
         _tranlation = new Translation();
         pointTextWriter();

@@ -1,45 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using TMPro;
-using System.IO;
+
 
 public class TranslationUI : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown languageDropdown;
-    [SerializeField] Language ImportedLanguage;
-    //[SerializeField] TranslationStorage _translationStorage;
-    // Start is called before the first frame update
-    //[SerializeField] TMP_Text ExistingText;
-    [SerializeField] TMP_Text ScrollText;
+    [SerializeField] public Language SelectedLanguage;
+    [SerializeField] public Language ImportedLanguage;
+    [SerializeField] public FilePicker filePicker;
+    [SerializeField] GameObject ParentOfScrollviews;
+
     void Start()
     {
         foreach(string language in TranslationStorage.LanguageOptions){
             languageDropdown.options.Add(new TMP_Dropdown.OptionData(language));
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SelectedLanguage = TranslationStorage.AllLanguages.Find(x => x.LanguageName == languageDropdown.options[0].text);
+        languageDropdown.RefreshShownValue();
+        DisplayTranslation(true);
     }
     public void ImportLanguageFiles(){
-        string path = EditorUtility.OpenFilePanel("Import Language file", "", "json");
-        if(path != null){
-            var fileContent = File.ReadAllBytes(path);
-            ImportedLanguage = JsonUtility.FromJson<Language>(System.Text.Encoding.UTF8.GetString(fileContent));
-            DisplayTranslation(false);
-        }
+        
+        filePicker.TranslationFile(this, true);
     }
     public void ExportLanguageFiles(){
-        string path = EditorUtility.SaveFilePanel("Export Language file", "",TranslationStorage.CurrentLanguageName + ".json", "json");
+        filePicker.TranslationFile(this,false);
+        /*string path = EditorUtility.SaveFilePanel("Export Language file", "",TranslationStorage.CurrentLanguageName + ".json", "json");
         if (path.Length != 0)
         {
             var languageData = JsonUtility.ToJson(TranslationStorage.CurrentLanguage, true);
             if (languageData != null)
                 File.WriteAllBytes(path, System.Text.Encoding.UTF8.GetBytes(languageData));
-        }
+        }*/
     }
     public void SaveTranslation(){
         new Translation().ImportLanguage(ImportedLanguage);
@@ -50,8 +44,14 @@ public class TranslationUI : MonoBehaviour
     public void DeleteTranslation(){
         new Translation().DeleteLanguage(languageDropdown.options[languageDropdown.value].text);
     }
-    public void DisplayTranslation(bool Lefttext)
+    public void DisplayTranslation(bool Left)
     {
-        ScrollText.text = JsonUtility.ToJson(ImportedLanguage, true);
+        if(Left){
+            ParentOfScrollviews.transform.GetChild(0).Find("Scroll View").GetComponentInChildren<TMP_Text>().text = JsonUtility.ToJson(SelectedLanguage, true);
+        }
+        else{
+            ParentOfScrollviews.transform.GetChild(1).gameObject.SetActive(true);
+            ParentOfScrollviews.transform.GetChild(1).Find("Scroll View").GetComponentInChildren<TMP_Text>().text = JsonUtility.ToJson(ImportedLanguage, true);
+        }
     }
 }

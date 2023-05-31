@@ -10,7 +10,8 @@ public class BikeAudio : MonoBehaviour
     [SerializeField] AudioSource soundOrigin;
     [SerializeField] AudioMixerSnapshot BikeAudioMain;
     [SerializeField] float transition;
-    [SerializeField] bool playSound;
+    [SerializeField] public bool playSound;
+    [SerializeField] float currentVolume;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +26,31 @@ public class BikeAudio : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!playSound)
+        if(playSound)
         StartCoroutine(playTireNoise());
     }
     IEnumerator playTireNoise(){
         int random = Random.Range(0, tireNoises.Length);
-        playSound = true;
+        playSound = false;
         currentTireNoise = tireNoises[random];
         soundOrigin.clip = currentTireNoise;
         soundOrigin.Play();
         yield return new WaitForSeconds(currentTireNoise.length);
-        playSound = false;
+        playSound = true;
     }
+    public void changeVolume(float Volume){
+        soundOrigin.volume = Volume;
+    }
+        
+        /*Debug.Log("Here!");
+        currentVolume = soundOrigin.volume;
+        float volume = currentVolume;
+        float time = 0.0f;
+        while(volume != Volume){
+            volume = Mathf.Lerp(currentVolume, Volume, time/1);
+            time += 0.5f*Time.deltaTime;
+            soundOrigin.volume = volume;
+            yield return null;
+        }
+    }*/
 }

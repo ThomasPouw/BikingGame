@@ -9,7 +9,7 @@ public abstract class BaseQuestion : MonoBehaviour
     [SerializeField] public int PointsReceived = 100;
     [SerializeField] [Range(0,6)]public int QuestionWrongPunishment = 1;
     [SerializeField] public Entry Question;
-    [SerializeField] public Entry[] Answers;
+    [SerializeField] public List<Entry> Answers;
 
     [Header("Other Vehicle Users")]
     [SerializeField] public Vehicle[] vehicles;
@@ -23,11 +23,8 @@ public abstract class BaseQuestion : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("Without Updated Love");
-    }
-    public void QuestionVehicleMovement(StartEnd startEnd){
+
+    public virtual void QuestionVehicleMovement(StartEnd startEnd){
         foreach (Vehicle vehicle in vehicles)
         {
             if(startEnd == StartEnd.Start){
