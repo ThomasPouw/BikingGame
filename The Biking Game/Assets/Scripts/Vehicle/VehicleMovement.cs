@@ -59,6 +59,7 @@ public class VehicleMovement : MonoBehaviour
             }
             WayPointCount++;
             if(vehiclePath.Waypoints[WayPointCount] != null){
+                Debug.Log(_navMeshAgent.destination);
                 _wheelMovement.RotateWheel(_navMeshAgent.destination, vehiclePath.Waypoints[WayPointCount].transform.position);
                 _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
             }

@@ -4970,7 +4970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &609219264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4989,8 +4989,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 219.35379, y: -41.463398}
-  m_SizeDelta: {x: 438.70758, y: 82.926796}
+  m_AnchoredPosition: {x: 245.47018, y: -46.144596}
+  m_SizeDelta: {x: 490.94037, y: 92.28919}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609219265
 MonoBehaviour:
@@ -6134,8 +6134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 219.35379, y: -134.3902}
-  m_SizeDelta: {x: 438.70758, y: 82.926796}
+  m_AnchoredPosition: {x: 245.47018, y: -46.144596}
+  m_SizeDelta: {x: 490.94037, y: 92.28919}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &773441249
 MonoBehaviour:
@@ -7944,12 +7944,11 @@ MonoBehaviour:
   m_ChildAlignment: 0
   HideHidden: 1
   VisibleChildren:
-  - {fileID: 609219264}
   - {fileID: 773441248}
   fitType: 3
   rows: 2
   columns: 1
-  cellSize: {x: 438.70758, y: 82.926796}
+  cellSize: {x: 490.94037, y: 92.28919}
   spacing: {x: 0, y: 10}
   fitX: 1
   fitY: 1
@@ -11345,7 +11344,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
+  m_AnchoredPosition: {x: -7.5000076, y: -0.5}
   m_SizeDelta: {x: -35, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1647172687
@@ -13527,7 +13526,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 87.15
+  m_fontSize: 72.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

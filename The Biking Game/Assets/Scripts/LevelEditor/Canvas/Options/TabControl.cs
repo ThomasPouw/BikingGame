@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TabControl : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class TabControl : MonoBehaviour
                 SE.SpawnPart = baseBlock;
                 GameObject G = Instantiate(baseBlock);
                 G.transform.SetParent(panel.transform, false);
+                panel.transform.GetChild(0).Find("Text").GetComponent<TMP_Text>().text = baseBlock.name;
                 G.layer = 5;
             }
             panel.transform.SetParent(ObjectMenu.transform, false);

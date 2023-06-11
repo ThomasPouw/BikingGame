@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1170327739333223572}
   - component: {fileID: 1918044743103094270}
   - component: {fileID: -7076040004372867157}
+  - component: {fileID: 2461788329853444170}
   m_Layer: 0
   m_Name: Deco_Park2
   m_TagString: Untagged
@@ -151,14 +152,14 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -178,6 +179,27 @@ MonoBehaviour:
   _rotation: 0
   _rotationCount: 0
   levelEditorAudio: {fileID: 0}
+--- !u!65 &2461788329853444170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011352635324705404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.000015, y: 10.5, z: 15.999999}
+  m_Center: {x: -0.0000009536743, y: 4.84, z: -0.00000047683716}
 --- !u!1 &4827845969379065973
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ MonoBehaviour:
   PointsReceived: 100
   QuestionWrongPunishment: 1
   Question:
-    OriginalLine: Who has priority? The pedestrian or you?
+    OriginalLine: Who has priority on this pedestrian crossing?
     TranslatedLine: Wie heeft voorrang? De voetganger of jij?
     HelperImages: []
     IsCorrect: 0

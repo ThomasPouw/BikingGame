@@ -31,8 +31,8 @@ public class CameraMovement : MonoBehaviour
         yRotation += mouseX;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -45f, 45f);
-        yRotation = Mathf.Clamp(yRotation, -75f, 75f);
+        xRotation = Mathf.Clamp(xRotation, -maxAngle, maxAngle);
+        yRotation = Mathf.Clamp(yRotation, -maxAngle, maxAngle);
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
     private void OnDrawGizmos() {

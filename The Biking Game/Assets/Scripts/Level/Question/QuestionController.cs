@@ -144,10 +144,10 @@ public class QuestionController : MonoBehaviour
         yield return new WaitForSeconds(2f);
     }
     IEnumerator LoadQuestion(){
-            yield return null;
+            
             _blockQuestion.Question = new Translation().TranslateSentence(_blockQuestion.Question.OriginalLine, "Question");
             _questionText.text = _blockQuestion.Question.TranslatedLine;
-            Transform _imageHolder = _questionScreen.transform.Find("ImageHolder");
+            Transform _imageHolder = _questionScreen.transform.Find("QuestionHolder").Find("ImageHolder");
     	    //Image[] _helperPictures = _questionScreen.transform.Find("ImageHolder").GetComponentsInChildren<Image>();
             for (int i = 0; i < _imageHolder.childCount; i++)
             {
@@ -161,6 +161,7 @@ public class QuestionController : MonoBehaviour
                     _imageHolder.GetChild(i).gameObject.SetActive(false);
                 }
             }
+            yield return null;
             
     }
     public void ControleSpeed(float Speed){

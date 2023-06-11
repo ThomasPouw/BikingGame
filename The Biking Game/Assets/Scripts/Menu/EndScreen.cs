@@ -19,11 +19,13 @@ public class EndScreen : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     public void ShowEndScreen(){
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         GameScreen = GameObject.Find("PointSystem");
         float points = GameScreen.GetComponent<PointComboUI>().Points;
         PointsText.text = new Translation().TranslateSentence("PointText", "LevelUI").TranslatedLine + points;
         GameScreen.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
+        
         
     }
     // Update is called once per frame
