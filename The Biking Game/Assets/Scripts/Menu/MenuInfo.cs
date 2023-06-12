@@ -10,7 +10,6 @@ public class MenuInfo: MonoBehaviour
     public string levelName;
     public float score;
     public void SetValue(MenuInfo menuInfo){
-        Debug.Log("HERE!");
         levelName = menuInfo.levelName;
         score = menuInfo.score;
         StartCoroutine(LoadLevel());

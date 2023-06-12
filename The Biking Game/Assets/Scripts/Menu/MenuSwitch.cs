@@ -19,7 +19,7 @@ public class MenuSwitch : MonoBehaviour
         
     }
     public void SwitchPanel(){
-        FuturePanel.SetActive(!FuturePanel.activeSelf);
+        FuturePanel.SetActive(true);
         if(CurrentPanel != null)
         CurrentPanel.SetActive(false);
     }

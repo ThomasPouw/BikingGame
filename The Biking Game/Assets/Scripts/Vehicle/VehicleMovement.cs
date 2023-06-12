@@ -29,7 +29,11 @@ public class VehicleMovement : MonoBehaviour
                 RaycastHit hit;
                 if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit)){
                     WayPoints = hit.collider.gameObject;
-                    vehiclePath = hit.collider.transform.Find("Waypoint").GetComponentInChildren<VehiclePath>();
+                    vehiclePath = hit.collider.gameObject.name == "SubWaypoint" ? hit.collider.transform.parent.GetComponent<VehiclePath>() : hit.collider.transform.Find("Waypoint").GetComponentInChildren<VehiclePath>();
+                    //if(vehiclePath == null){
+                     //   Debug.Log("Here!");
+                    //   vehiclePath = hit.collider.gameObject.transform.parent.GetComponent<VehiclePath>(); 
+                    //}
                     BaseQuestion BQ = hit.collider.GetComponentInChildren<BaseQuestion>();
                     if(BQ != null){
                         BQ.QuestionVehicleMovement(StartEnd.Start);
@@ -59,7 +63,6 @@ public class VehicleMovement : MonoBehaviour
             }
             WayPointCount++;
             if(vehiclePath.Waypoints[WayPointCount] != null){
-                Debug.Log(_navMeshAgent.destination);
                 _wheelMovement.RotateWheel(_navMeshAgent.destination, vehiclePath.Waypoints[WayPointCount].transform.position);
                 _navMeshAgent.SetDestination(vehiclePath.Waypoints[WayPointCount].transform.position);
             }

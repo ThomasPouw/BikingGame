@@ -22,8 +22,10 @@ public class EndScreen : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         GameScreen = GameObject.Find("PointSystem");
+        GameObject.Find("Bike").GetComponent<AudioSource>().enabled = false;
         float points = GameScreen.GetComponent<PointComboUI>().Points;
         PointsText.text = new Translation().TranslateSentence("PointText", "LevelUI").TranslatedLine + points;
+        ReturnButton.text = new Translation().TranslateSentence("Back To Levelselect", "Menu").TranslatedLine;
         GameScreen.SetActive(false);
         
         

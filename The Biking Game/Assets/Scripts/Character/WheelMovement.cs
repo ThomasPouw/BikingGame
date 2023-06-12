@@ -8,9 +8,8 @@ public class WheelMovement : MonoBehaviour
     {
         Vector3 distance = EndPoint - beginPoint;
         distance = new Vector3(distance.x, 0, distance.z);
-
-        Quaternion endRotation = Quaternion.LookRotation(distance);//* Quaternion.Euler(0,90,0);
+        Quaternion endRotation = Quaternion.LookRotation(distance);
         Debug.Log(endRotation);
-        transform.rotation= Quaternion.Slerp(transform.rotation, endRotation, 250f* Time.fixedDeltaTime);
+        transform.rotation= endRotation;
     }
 }

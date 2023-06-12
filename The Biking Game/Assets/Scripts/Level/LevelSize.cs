@@ -107,7 +107,6 @@ public class LevelSize : MonoBehaviour
     }
     public BlockInfo MakeBlock(JsonBlockInfo jsonBlockInfo, int x, int z){
         GameObject tile;
-        Debug.Log(jsonBlockInfo.tileName);
         if(jsonBlockInfo.tileName.Contains("Deco")){
             tile = Instantiate((GameObject)Resources.Load("Prefab/Decoration/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
             tile.name = jsonBlockInfo.tileName;
