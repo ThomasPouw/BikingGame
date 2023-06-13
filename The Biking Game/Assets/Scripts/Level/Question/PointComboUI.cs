@@ -16,6 +16,9 @@ public class PointComboUI : MonoBehaviour
     public int Combo {
         get{return _combo;} 
         set{ 
+            if(value < 0)
+                _combo = 0;
+            else
             _combo = value;
             _comboText.enabled = true;
             comboTextWriter();

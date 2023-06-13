@@ -9,6 +9,7 @@ public class EndScreen : MonoBehaviour
     [SerializeField] public TMP_Text ReturnButton;
     [SerializeField] public TMP_Text PointsText;
     [SerializeField] public GameObject GameScreen;
+    private bool ActivateClick = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +20,7 @@ public class EndScreen : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     public void ShowEndScreen(){
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        ActivateClick = true;
         GameScreen = GameObject.Find("PointSystem");
         GameObject.Find("Bike").GetComponent<AudioSource>().enabled = false;
         float points = GameScreen.GetComponent<PointComboUI>().Points;
@@ -33,6 +33,10 @@ public class EndScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(ActivateClick){
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            ActivateClick = false;
+        }
     }
 }
