@@ -34,6 +34,7 @@ public class MenuInfo: MonoBehaviour
         }
         if(SceneManager.GetActiveScene().name == "LevelEditor"){
             JSONLevelSize jSONLevelSize = GetComponent<LevelStorage>().ReadLevel(levelName);
+            GameObject.Find("LevelEditor").GetComponent<LevelSize>().panelActivate = true;
             GameObject.Find("LevelEditor").GetComponent<LevelSize>().SetValue(jSONLevelSize);
             GameObject.Find("LevelEditor").GetComponent<LevelSize>().skipMakeLevel = true;
             GameObject.Find("XField").GetComponent<TMP_InputField>().text = jSONLevelSize.xMax.ToString();

@@ -15,7 +15,7 @@ public class LevelLoad : MonoBehaviour
         Canvas= GameObject.Find("Canvas");
     }
     private void Update() {
-        if(LevelStorage.JSONlevelSizes.Count != 0 && !foundLevels){
+        if(LevelStorage.JSONlevelSizes.Count != 0 && !foundLevels && LevelStorage.s_isConnected){
             foreach (JSONLevelSize jSONLevelSize in LevelStorage.JSONlevelSizes)
             {
                 GameObject LevelPanel = Instantiate(Panel, transform.position, transform.rotation, transform);
@@ -39,5 +39,8 @@ public class LevelLoad : MonoBehaviour
             }
             foundLevels = true;
         }
-    }   
+    }
+    private void levelLoad(){
+
+    }
 }

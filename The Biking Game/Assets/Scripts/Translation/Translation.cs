@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Translation
 {
@@ -36,6 +37,10 @@ public class Translation
     public Entry TranslateSentence(string sentence, string dictionaryType){
         return TranslationStorage.CurrentLanguage[dictionaryType][sentence];
     }
+    public IEnumerator TranslateSentence(string sentence, string dictionaryType, System.Action<Entry> callBack){
+        yield return new WaitUntil(() => TranslationStorage.s_isConnected);
+        callBack(TranslationStorage.CurrentLanguage[dictionaryType][sentence]);
+    }
 
 }
 [System.Serializable]
@@ -50,3 +55,4 @@ public class LanguageDictionary{
     public string DictionaryType;
     public Entry[] TranslationDictionary;
 }
+

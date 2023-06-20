@@ -14,8 +14,11 @@ public class SingleLineTranslation : MonoBehaviour
     }
     private void Start() {
         if(entry != null){
-           entry = new Translation().TranslateSentence(entry.OriginalLine, DictionaryType);
-           _displayText.text = entry.TranslatedLine;
+           StartCoroutine(new Translation().TranslateSentence(entry.OriginalLine, DictionaryType, (entry)=> {
+            _displayText.text = entry.TranslatedLine;
+           }));
+           //CALLBACK!
+           //_displayText.text = entry.TranslatedLine;
         }
         else
         {

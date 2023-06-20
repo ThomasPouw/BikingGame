@@ -313,6 +313,7 @@ MonoBehaviour:
   - {fileID: 8182875795376069510}
   _getsQuestion: 1
   _isSpecialRoad: 1
+  lineMaterial: {fileID: 2100000, guid: 35bdffd08fd051843b3857bd50894422, type: 2}
 --- !u!114 &3949105446069553148
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ public class VehicleMovement : MonoBehaviour
         if(_navMeshAgent.remainingDistance <= 1){
             if(vehiclePath.Waypoints.Count == WayPointCount-1){
                 RaycastHit hit;
-                if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit)){
+                if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit, 100f, ~8)){
                     WayPoints = hit.collider.gameObject;
                     vehiclePath = hit.collider.gameObject.transform.Find("Waypoint").GetComponentInChildren<VehiclePath>();
                     BaseQuestion BQ = hit.collider.transform.Find("Question").GetComponentInChildren<BaseQuestion>();

@@ -127,7 +127,7 @@ public class QuestionController : MonoBehaviour
         P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();
         P.Find("AnswerOption").GetComponent<TMP_Text>().text = _blockQuestion.Answers[i].TranslatedLine;
         Image[] _helperPictures = P.Find("ImageHolder").GetComponentsInChildren<Image>(true);
-        for (int ii = 0; ii < _helperPictures.Length; ii++)
+        for (int ii = 0; ii < 4; ii++)
             {
                 if(_blockQuestion.Answers[i].HelperImages.Length > ii){
                     _helperPictures[ii].gameObject.SetActive(true);
@@ -148,7 +148,6 @@ public class QuestionController : MonoBehaviour
             _blockQuestion.Question = new Translation().TranslateSentence(_blockQuestion.Question.OriginalLine, "Question");
             _questionText.text = _blockQuestion.Question.TranslatedLine;
             Transform _imageHolder = _questionScreen.transform.Find("QuestionHolder").Find("ImageHolder");
-    	    //Image[] _helperPictures = _questionScreen.transform.Find("ImageHolder").GetComponentsInChildren<Image>();
             for (int i = 0; i < _imageHolder.childCount; i++)
             {
                 _imageHolder.GetChild(i).gameObject.SetActive(true);

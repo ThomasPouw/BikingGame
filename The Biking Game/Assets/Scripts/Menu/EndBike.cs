@@ -8,6 +8,7 @@ public class EndBike : MonoBehaviour
     [SerializeField] private EndScreen _endScreen;
     private void OnTriggerEnter(Collider other) {
         endScreenUI.SetActive(true);
+        GameObject.Find("BikeOperator").GetComponent<VehicleMovement>().enabled = false;
         _endScreen.ShowEndScreen();
     }
     private void OnEnable() {

@@ -17,15 +17,14 @@ public class TranslationStorage : MonoBehaviour
     [SerializeField] public static string CurrentLanguageName;
 
     [SerializeField] private ImageStorage _imageStorage;
-    
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] public static bool s_isConnected;
+    [SerializeField] private static int s_loopCount = 0;
+    
+    private void OnEnable() {
+      s_isConnected = false;
       reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-      //writeNewTranslation(JsonUtility.ToJson(LanguageCheatSheet), LanguageCheatSheet.LanguageName);
-      Debug.Log("TranslationSystem started!");
-      
+      isDatabaseOnline();
       if(AllLanguages == null){
         AllLanguages = new List<Language>();
         LanguageOptions = new List<string>();
@@ -34,11 +33,36 @@ public class TranslationStorage : MonoBehaviour
         //selectCurrentLanguage("Simple Dutch");
       }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    // Start is called before the first frame update
+    void Start()
     {
-        //Debug.Log(CurrentLanguage.ToString());
+      
+      //writeNewTranslation(JsonUtility.ToJson(LanguageCheatSheet), LanguageCheatSheet.LanguageName);
+      Debug.Log("TranslationSystem started!");
+      
+      
+    }
+    public void isDatabaseOnline(){
+      DatabaseReference DataRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").GetReference(".info/connected");
+      isDatabaseOnlineLoop(DataRef);
+    }
+    public async void isDatabaseOnlineLoop(DatabaseReference database){
+      await database.GetValueAsync().ContinueWith(task => {
+        s_loopCount +=1;
+        if (task.IsFaulted || task.IsCanceled) {
+          isDatabaseOnlineLoop(database);
+        }
+        else if (task.IsCompleted){
+          s_isConnected = (bool)task.Result.Value;
+          Debug.Log(s_loopCount + " "+ s_isConnected);
+          if(s_loopCount == 10){
+          }
+          else if(s_isConnected == false){
+            isDatabaseOnlineLoop(database);
+          }
+        }
+        });
     }
     public void selectCurrentLanguage(string languageName)
     {

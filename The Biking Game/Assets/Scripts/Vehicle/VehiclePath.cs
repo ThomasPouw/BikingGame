@@ -87,7 +87,7 @@ public class VehiclePath : MonoBehaviour
         List<int> indices = new List<int>();
         for (int i = 0; i < Waypoints.Count; i++)
         {
-            vertices.Add(Waypoints[i].transform.localPosition);
+            vertices.Add(Waypoints[i].transform.localPosition+ new Vector3(0,1,0));
             indices.Add(i);
             if(i != 0 || i == Waypoints.Count-1)
             indices.Add(i);

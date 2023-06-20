@@ -5,21 +5,30 @@ using Firebase.Storage;
 using Firebase.Extensions;
 using UnityEngine.UI;
 using System;
+using Firebase.Database;
+using System.Threading.Tasks;
+using System.Timers;
 
 public class ImageStorage : MonoBehaviour
 {
     public static Dictionary<string, Sprite> Images;
     FirebaseStorage storage;
     StorageReference storageRef;
+    DatabaseReference dataBaseRef;
+    bool isConnected = false;
+
     // Start is called before the first frame update
-    void Start()
-    {
+    private void OnEnable() {
         if(Images == null){
             Images = new Dictionary<string, Sprite>();
         }
         storage = FirebaseStorage.DefaultInstance;
         storageRef = storage.GetReferenceFromUrl("gs://bikinggame-3cabe.appspot.com");
-        //DownloadPicture("CV_Foto.jpg");
+        dataBaseRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
+        //dataBaseRef.Database.GoOnline();
+    }
+    void Start()
+    {
     }
 
     // Update is called once per frame
@@ -27,8 +36,14 @@ public class ImageStorage : MonoBehaviour
     {
         
     }
-    public void UploadPicture(string file){
-        //Maybe?
+    public async void UploadPicture(byte[] imageBytes, string imageName, int AmountofPictures)
+    {
+        StorageReference pathReference = storage.GetReference("images/"+ imageName);
+        //const long maxAllowedSize = 1 * 1024 * 1024;
+        Texture2D texture = new Texture2D(500, 500);
+        texture.LoadImage(imageBytes);  
+        await pathReference.PutBytesAsync(texture.GetRawTextureData());
+        await dataBaseRef.Child("ImageNames/"+AmountofPictures).SetValueAsync(imageName);
     }
     public async void DownloadPicture(string imageName, Image image){
         try{
@@ -70,6 +85,34 @@ public class ImageStorage : MonoBehaviour
         Debug.Log(imageName+": " +result.Length);
         image.sprite = sprite;
         yield return null;
-        //yield return new WaitForSeconds(0.5f);
+        
+    }
+
+    //This is needed as there is no way to collect the image folder in firebase Storage (Unity). 
+    //There is for Andriod, but not yet for Unity.
+    public async Task<List<string>> ListAll(){
+        List<string> AllImageNames = new List<string>();
+        try{
+            new WaitForSeconds(0.5f);
+            await dataBaseRef.Child("ImageNames/").GetValueAsync().ContinueWith(task => {
+            if (task.IsFaulted || task.IsCanceled) {
+                Debug.LogError(task.Exception);
+            }
+            else if (task.IsCompleted) {
+                Debug.Log("Mission complete!");
+                DataSnapshot snapshot = task.Result;
+                Debug.Log(snapshot.GetRawJsonValue());
+                foreach(DataSnapshot child in snapshot.Children){
+                    AllImageNames.Add(child.Value.ToString());
+                }
+        }
+      });
+      return AllImageNames;
+        }
+        catch(Exception E){
+          Debug.LogError(E);
+          return null;
+        }
+
     }
 }

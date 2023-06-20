@@ -73,20 +73,13 @@ public class LevelSize : MonoBehaviour
                         tile.name = Plate.name;
                         tile.transform.parent = transform;
                     }
+
                     tiles.Add(blockInfo);
                 }
 
             }
         }
         StartCoroutine(BuildNavmesh());
-        if(panelActivate || skipMakeLevel){
-            foreach(BlockInfo blockInfo in tiles){
-                if(blockInfo.tile.GetComponent<CanvasMenuAppear>() == null)
-                {
-                    blockInfo.tile.AddComponent<CanvasMenuAppear>();
-                }
-            }
-        }
     }
     IEnumerator BuildNavmesh(){
         yield return new WaitForSeconds(0.1f);
@@ -99,7 +92,7 @@ public class LevelSize : MonoBehaviour
     {
         levelName = jsonLevelSize.levelName;
         alreadyPlacedTilesJSON = jsonLevelSize.alreadyPlacedTilesJSON;
-        Debug.Log("jsonLevelSize.alreadyPlacedTilesJSON: "+jsonLevelSize.alreadyPlacedTilesJSON.Count);
+        //Debug.Log("jsonLevelSize.alreadyPlacedTilesJSON: "+jsonLevelSize.alreadyPlacedTilesJSON.Count);
         blockSize = jsonLevelSize.blockSize;
         xMax = jsonLevelSize.xMax;
         zMax = jsonLevelSize.zMax;
@@ -112,6 +105,12 @@ public class LevelSize : MonoBehaviour
             tile.name = jsonBlockInfo.tileName;
             tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
             tile.transform.parent = transform;
+            if(panelActivate){
+                if(tile.GetComponent<CanvasMenuAppear>() == null)
+                {
+                    tile.AddComponent<CanvasMenuAppear>();
+                }
+            }
             return new BlockInfo(tile,jsonBlockInfo.blockRotation, x, z);
         }
         else{
@@ -130,8 +129,20 @@ public class LevelSize : MonoBehaviour
                 _wayPoints.name = jsonBlockInfo.wayPointName;
                 _wayPoints.transform.parent = tile.transform.Find("Waypoint").transform;
                 _wayPoints.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.wayPointRotation);
+                
             }
-        
+            if(panelActivate){
+                if(tile.GetComponent<CanvasMenuAppear>() == null)
+                {
+                    tile.AddComponent<CanvasMenuAppear>();
+                }
+                if(_wayPoints != null)
+                {
+                    _wayPoints.AddComponent<MeshFilter>();
+                    _wayPoints.AddComponent<MeshRenderer>();
+                    _wayPoints.GetComponent<VehiclePath>().EditorMeshMaker();
+                }
+            }
             tile.GetComponent<BlockRotation>().SetRotation(jsonBlockInfo.blockRotation);
             tile.transform.parent = transform;
             return new BlockInfo(tile, x, z, _wayPoints, _baseQuestion, jsonBlockInfo.blockRotation, jsonBlockInfo.wayPointRotation, jsonBlockInfo.questionRotation);

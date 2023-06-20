@@ -16,10 +16,15 @@ public class DragAndDropObject : MonoBehaviour
         RaycastHit hit;
         GameObject MainCamera = GameObject.Find("MainCamera");
         MainCamera.GetComponent<LevelEditorAudio>().playDropElement();
-        if(Physics.Raycast(transform.position, Vector3.down, out hit)){
+        if(Physics.Raycast(transform.position- new Vector3(0,1,0), Vector3.down, out hit)){
             GameObject replaced = hit.collider.gameObject;
+            Debug.Log(replaced);
             LevelSize levelSize = GameObject.Find("LevelEditor").GetComponent<LevelSize>();
             int index = levelSize.tiles.FindIndex(x => x.tile == replaced);
+            Debug.Log(gameObject);
+            Debug.Log(index);
+            Debug.Log(levelSize.tiles[index].X);
+            Debug.Log(levelSize.tiles[index].Z);
             levelSize.tiles.Insert(index, new BlockInfo(gameObject, levelSize.tiles[index].X, levelSize.tiles[index].Z));
 
             transform.position = replaced.transform.position;

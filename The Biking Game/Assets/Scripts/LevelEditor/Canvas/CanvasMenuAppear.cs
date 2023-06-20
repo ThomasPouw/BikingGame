@@ -13,6 +13,7 @@ public class CanvasMenuAppear : MonoBehaviour
     [SerializeField] private GraphicRaycaster _graphicRaycaster;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private PointerEventData _PointerEventData;
+    [SerializeField] private Transform _MenuPosition;
     
 
     private GameObject MenuPanel;
@@ -24,16 +25,21 @@ public class CanvasMenuAppear : MonoBehaviour
         popUpPanel = (GameObject)Resources.Load("Prefab/Menu/OptionMenu");
         _graphicRaycaster= GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();  
         _eventSystem= GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        _MenuPosition = transform.Find("Menu");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(MenuPanel != null)
+        MenuPanel.transform.position = Camera.main.WorldToScreenPoint(_MenuPosition.position);
     }
 
     private void OnMouseDown()
     {
+            if(_MenuPosition == null){
+                return;
+            }
             if(popupStorage.panel != null){       
                    
                 _PointerEventData = new PointerEventData(_eventSystem);
@@ -43,13 +49,9 @@ public class CanvasMenuAppear : MonoBehaviour
                 if(results.Count != 0)
                 return;
             }
-            Transform menuPosition = transform.Find("Menu");
-            if(menuPosition == null){
-                return;
-            }
             MenuPanel = Instantiate(popUpPanel);
             MenuPanel.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            MenuPanel.transform.position = Camera.main.WorldToScreenPoint(menuPosition.position);
+            MenuPanel.transform.position = Camera.main.WorldToScreenPoint(_MenuPosition.position);
             ElementListAppear[] spawnElements = MenuPanel.GetComponentsInChildren<ElementListAppear>();
             AllowedElements allowedElements = GetComponent<AllowedElements>();
             Transform roadPanel = MenuPanel.transform.Find("OptionMenu").Find("Roads");
@@ -92,6 +94,5 @@ public class CanvasMenuAppear : MonoBehaviour
             popupStorage.panel = MenuPanel;    
             //Needs fixing 
     }
-    
 
 }

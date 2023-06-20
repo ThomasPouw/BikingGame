@@ -27,13 +27,6 @@ public class TranslationUI : MonoBehaviour
     }
     public void ExportLanguageFiles(){
         filePicker.TranslationFile(this,false);
-        /*string path = EditorUtility.SaveFilePanel("Export Language file", "",TranslationStorage.CurrentLanguageName + ".json", "json");
-        if (path.Length != 0)
-        {
-            var languageData = JsonUtility.ToJson(TranslationStorage.CurrentLanguage, true);
-            if (languageData != null)
-                File.WriteAllBytes(path, System.Text.Encoding.UTF8.GetBytes(languageData));
-        }*/
     }
     public void SaveTranslation(){
         new Translation().ImportLanguage(ImportedLanguage);

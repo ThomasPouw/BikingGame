@@ -11,15 +11,38 @@ public class LevelStorage : MonoBehaviour
     public static List<JSONLevelSize> JSONlevelSizes;
     [SerializeField] public static JSONLevelSize JSONlevelSize;
     [SerializeField] LevelSize levelSize;
+    [SerializeField] public static bool s_isConnected;
+    [SerializeField] private static int s_loopCount = 0;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    private void OnEnable() {
         reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
+        isDatabaseOnline();
         if(JSONlevelSizes == null){
             JSONlevelSizes = new List<JSONLevelSize>();
             ReadLevels();
         }
+    }
+    public void isDatabaseOnline(){
+      DatabaseReference DataRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").GetReference(".info/connected");
+      isDatabaseOnlineLoop(DataRef);
+    }
+    public async void isDatabaseOnlineLoop(DatabaseReference database){
+      await database.GetValueAsync().ContinueWith(task => {
+        s_loopCount +=1;
+        if (task.IsFaulted || task.IsCanceled) {
+          isDatabaseOnlineLoop(database);
+        }
+        else if (task.IsCompleted){
+          s_isConnected = (bool)task.Result.Value;
+          Debug.Log(s_loopCount + " "+ s_isConnected);
+          if(s_loopCount == 10){
+          }
+          else if(s_isConnected == false){
+            isDatabaseOnlineLoop(database);
+          }
+        }
+        });
     }
     public void SaveLevel(JSONLevelSize JSONlevelSize){
         try{
@@ -42,7 +65,6 @@ public class LevelStorage : MonoBehaviour
                 }
                 else if (task.IsCompleted) 
                 {
-                    Debug.Log("Level Mission complete!");
                     DataSnapshot snapshot = task.Result;
                     Debug.Log(snapshot.GetRawJsonValue());
                     List<JSONLevelSize> tempJsonLevelSize = new List<JSONLevelSize>();
@@ -52,6 +74,7 @@ public class LevelStorage : MonoBehaviour
                         tempJsonLevelSize.Add(loadLevel);
                     }
                     JSONlevelSizes = tempJsonLevelSize;
+                    s_isConnected = true;
                 }
             }
         );
@@ -65,17 +88,5 @@ public class LevelStorage : MonoBehaviour
         JSONlevelSize = JSONlevelSizes.Find(x => x.levelName == LevelName);
         return JSONlevelSize;
     }
-    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnEnable() {
-        //reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-        //if(JSONlevelSizes == null){
-        //    ReadLevels();
-        //}
-    }
 }
