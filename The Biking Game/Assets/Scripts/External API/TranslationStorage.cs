@@ -22,36 +22,36 @@ public class TranslationStorage : MonoBehaviour
     [SerializeField] private static int s_loopCount = 0;
     
     private void OnEnable() {
+      
       s_isConnected = false;
       reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-      isDatabaseOnline();
-      if(AllLanguages == null){
-        AllLanguages = new List<Language>();
-        LanguageOptions = new List<string>();
-        CurrentLanguage = new Dictionary<string, Dictionary<string, Entry>>();
-        ReadAllLanguages();
-        //selectCurrentLanguage("Simple Dutch");
-      }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-      //writeNewTranslation(JsonUtility.ToJson(LanguageCheatSheet), LanguageCheatSheet.LanguageName);
       Debug.Log("TranslationSystem started!");
-      
+      if(AllLanguages == null){
+          AllLanguages = new List<Language>();
+          LanguageOptions = new List<string>();
+          CurrentLanguage = new Dictionary<string, Dictionary<string, Entry>>();
+      }
+      isDatabaseOnline((online) => {
+        if(!online){
+          Debug.LogError("DataBase never went online!");
+          return;
+        }
+          ReadAllLanguages();
+      });
       
     }
-    public void isDatabaseOnline(){
+    public async void isDatabaseOnline(System.Action<bool> callback){
       DatabaseReference DataRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").GetReference(".info/connected");
-      isDatabaseOnlineLoop(DataRef);
+      callback(await isDatabaseOnlineLoop(DataRef));
+      await isDatabaseOnlineLoop(DataRef).ContinueWith((online) => {
+        callback(online.Result);
+      });
     }
-    public async void isDatabaseOnlineLoop(DatabaseReference database){
-      await database.GetValueAsync().ContinueWith(task => {
+    public async Task<bool> isDatabaseOnlineLoop(DatabaseReference database){
+      await database.GetValueAsync().ContinueWith(async task => {
         s_loopCount +=1;
         if (task.IsFaulted || task.IsCanceled) {
-          isDatabaseOnlineLoop(database);
+          await isDatabaseOnlineLoop(database);
         }
         else if (task.IsCompleted){
           s_isConnected = (bool)task.Result.Value;
@@ -59,10 +59,11 @@ public class TranslationStorage : MonoBehaviour
           if(s_loopCount == 10){
           }
           else if(s_isConnected == false){
-            isDatabaseOnlineLoop(database);
+            await isDatabaseOnlineLoop(database);
           }
         }
         });
+        return s_isConnected;
     }
     public void selectCurrentLanguage(string languageName)
     {
@@ -71,7 +72,7 @@ public class TranslationStorage : MonoBehaviour
         foreach(Language language in AllLanguages){
           if(language.LanguageName == languageName){
             MakeDictionaryForCurrent(language);
-            break;
+            return;
           }
         }
       }
@@ -89,6 +90,7 @@ public class TranslationStorage : MonoBehaviour
           DataSnapshot snapshot = task.Result;
           Debug.Log(snapshot.GetRawJsonValue());
           //AllLanguages = JsonUtility.FromJson<List<Language>>(snapshot.GetRawJsonValue());
+          if(snapshot.ChildrenCount != AllLanguages.Count)
           foreach (DataSnapshot child in snapshot.Children)
           {
               Language loadLanguage = JsonUtility.FromJson<Language>(child.GetRawJsonValue());

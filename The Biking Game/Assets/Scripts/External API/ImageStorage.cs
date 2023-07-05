@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using System;
 using Firebase.Database;
 using System.Threading.Tasks;
-using System.Timers;
 
 public class ImageStorage : MonoBehaviour
 {
@@ -38,12 +37,49 @@ public class ImageStorage : MonoBehaviour
     }
     public async void UploadPicture(byte[] imageBytes, string imageName, int AmountofPictures)
     {
+        string ImageType = imageName.Split('.')[1];
+        switch (ImageType)
+        {
+            case("jpg"):
+                ImageType = $"image/jpeg";
+                break;
+            case("jpeg"):
+                ImageType = $"image/jpeg";
+                break;
+            case("png"):
+                ImageType = $"image/png";
+                break;
+            default:
+                Debug.LogError($"Selected type \"{ImageType}\" is not supported!");
+                return;
+        }
         StorageReference pathReference = storage.GetReference("images/"+ imageName);
-        //const long maxAllowedSize = 1 * 1024 * 1024;
-        Texture2D texture = new Texture2D(500, 500);
-        texture.LoadImage(imageBytes);  
-        await pathReference.PutBytesAsync(texture.GetRawTextureData());
+        MetadataChange newMetadata = new MetadataChange()
+        {
+            ContentType = ImageType
+        };
+        await pathReference.PutBytesAsync(imageBytes, newMetadata);
         await dataBaseRef.Child("ImageNames/"+AmountofPictures).SetValueAsync(imageName);
+    }
+    public async void DeletePicture(string imageName, List<string> imageNames)
+    {
+        StorageReference pathReference = storage.GetReference("images/"+ imageName);
+        await dataBaseRef.Child($"ImageNames/").SetValueAsync(imageNames).ContinueWithOnMainThread(task => {
+            if (task.IsCompleted) {
+            }
+            else {
+                Debug.LogException(task.Exception);
+                return;
+            }
+        });
+        await pathReference.DeleteAsync().ContinueWithOnMainThread(task => {
+            if (task.IsCompleted) {
+            }
+            else {
+                Debug.LogException(task.Exception);
+                return;
+            }
+        });
     }
     public async void DownloadPicture(string imageName, Image image){
         try{
@@ -63,7 +99,6 @@ public class ImageStorage : MonoBehaviour
                     // Uh-oh, an error occurred!
                 }
                 else {
-                    Debug.Log(imageName+ ": "+ (DateTime.Now - time).ToString());
                     if(!Images.ContainsKey(imageName)){
                         StartCoroutine(SetPicture(texture, imageName, image, task.Result));
                     }
@@ -87,6 +122,7 @@ public class ImageStorage : MonoBehaviour
         yield return null;
         
     }
+
 
     //This is needed as there is no way to collect the image folder in firebase Storage (Unity). 
     //There is for Andriod, but not yet for Unity.

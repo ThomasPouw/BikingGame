@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
+using TMPro;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -9,17 +11,16 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] public bool EverythingLoaded;
     [SerializeField] Animator animator;
     float t = 0.0f;
-    // Start is called before the first frame update
-    GameObject _bikeOperator;
-    private void Awake() {
-        _bikeOperator = GameObject.Find("BikeOperator");
-        _bikeOperator.GetComponent<VehicleMovement>().ready = false;
-        //_bikeOperator.GetComponent<NavMeshAgent>().isStopped = true;
-    }
+    [SerializeField] GameObject _bikeOperator;
     public void StartBike()
     {
-        _bikeOperator.GetComponent<VehicleMovement>().ready = true;
+        NavMeshAgent n = _bikeOperator.GetComponent<NavMeshAgent>();
+        _bikeOperator.GetComponent<VehicleMovement>().enabled = true;
+        GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().enabled = true;
+        GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = "NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>();
+        WriteDebugLog.WriteString("NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>());
         //_bikeOperator.GetComponent<NavMeshAgent>().isStopped = false;
+        _bikeOperator.GetComponent<VehicleMovement>().ready = true;
         _bikeOperator.transform.Find("CameraHolder").GetComponent<BikeAudio>().playSound = true;
         gameObject.SetActive(false);
     }

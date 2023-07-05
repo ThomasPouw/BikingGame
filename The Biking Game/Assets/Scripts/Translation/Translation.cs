@@ -38,7 +38,7 @@ public class Translation
         return TranslationStorage.CurrentLanguage[dictionaryType][sentence];
     }
     public IEnumerator TranslateSentence(string sentence, string dictionaryType, System.Action<Entry> callBack){
-        yield return new WaitUntil(() => TranslationStorage.s_isConnected);
+        yield return new WaitUntil(() => TranslationStorage.s_isConnected && TranslationStorage.CurrentLanguage.Count != 0);
         callBack(TranslationStorage.CurrentLanguage[dictionaryType][sentence]);
     }
 

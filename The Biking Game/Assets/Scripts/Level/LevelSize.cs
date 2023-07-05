@@ -83,7 +83,13 @@ public class LevelSize : MonoBehaviour
     }
     IEnumerator BuildNavmesh(){
         yield return new WaitForSeconds(0.1f);
-        surfaces.BuildNavMesh();
+        if(surfaces.navMeshData != null){
+            surfaces.UpdateNavMesh(surfaces.navMeshData);
+        }
+        else{
+            surfaces.BuildNavMesh();
+        }
+        yield return new WaitForSeconds(0.2f);
         if(loadingScreen != null){
             loadingScreen.EverythingLoaded = true;
         }
@@ -100,6 +106,12 @@ public class LevelSize : MonoBehaviour
     }
     public BlockInfo MakeBlock(JsonBlockInfo jsonBlockInfo, int x, int z){
         GameObject tile;
+        if(jsonBlockInfo.tileName == "PlaceHolder"){
+            tile = Instantiate((GameObject)Resources.Load("Prefab/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
+            tile.name = jsonBlockInfo.tileName;
+            tile.transform.parent = transform;
+            return new BlockInfo(tile,jsonBlockInfo.blockRotation, x, z);
+        }
         if(jsonBlockInfo.tileName.Contains("Deco")){
             tile = Instantiate((GameObject)Resources.Load("Prefab/Decoration/"+ jsonBlockInfo.tileName), new Vector3(this.transform.position.x +x*blockSize, this.transform.position.y, this.transform.position.z +z*blockSize), this.transform.rotation);
             tile.name = jsonBlockInfo.tileName;

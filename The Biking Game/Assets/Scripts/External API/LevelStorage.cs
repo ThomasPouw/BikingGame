@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Database;
 using Firebase.Extensions;
+using System.Threading.Tasks;
 
 public class LevelStorage : MonoBehaviour
 {
@@ -17,32 +18,37 @@ public class LevelStorage : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable() {
         reference = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-        isDatabaseOnline();
         if(JSONlevelSizes == null){
             JSONlevelSizes = new List<JSONLevelSize>();
+        }
+        isDatabaseOnline((online) => {
             ReadLevels();
-        }
-    }
-    public void isDatabaseOnline(){
-      DatabaseReference DataRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").GetReference(".info/connected");
-      isDatabaseOnlineLoop(DataRef);
-    }
-    public async void isDatabaseOnlineLoop(DatabaseReference database){
-      await database.GetValueAsync().ContinueWith(task => {
-        s_loopCount +=1;
-        if (task.IsFaulted || task.IsCanceled) {
-          isDatabaseOnlineLoop(database);
-        }
-        else if (task.IsCompleted){
-          s_isConnected = (bool)task.Result.Value;
-          Debug.Log(s_loopCount + " "+ s_isConnected);
-          if(s_loopCount == 10){
-          }
-          else if(s_isConnected == false){
-            isDatabaseOnlineLoop(database);
-          }
-        }
         });
+            
+        
+    }
+    public async void isDatabaseOnline(System.Action<bool> callback){
+      DatabaseReference DataRef = FirebaseDatabase.GetInstance("https://bikinggame-3cabe-default-rtdb.europe-west1.firebasedatabase.app/").GetReference(".info/connected");
+      await isDatabaseOnlineLoop(DataRef).ContinueWith((online) => {
+        callback(online.Result);
+      });
+    }
+    public async Task<bool> isDatabaseOnlineLoop(DatabaseReference database){
+      await database.GetValueAsync().ContinueWith(async task => {
+            s_loopCount +=1;
+            if (task.IsFaulted || task.IsCanceled) {
+                await isDatabaseOnlineLoop(database);
+            }
+            else if (task.IsCompleted){
+                s_isConnected = (bool)task.Result.Value;
+                Debug.Log(s_loopCount + " "+ s_isConnected);
+                if(s_loopCount == 50){}
+                else if(s_isConnected == false){
+                    await isDatabaseOnlineLoop(database);
+                }
+            }
+        });
+        return s_isConnected;
     }
     public void SaveLevel(JSONLevelSize JSONlevelSize){
         try{
@@ -53,6 +59,8 @@ public class LevelStorage : MonoBehaviour
         }
     }
     public void DeleteLevel(string LevelName){
+        JSONLevelSize JLS = JSONlevelSizes.Find(x => x.levelName == LevelName);
+        JSONlevelSizes.Remove(JLS);
         reference.Child("level/"+LevelName).RemoveValueAsync();
     }
     public void ReadLevels(){

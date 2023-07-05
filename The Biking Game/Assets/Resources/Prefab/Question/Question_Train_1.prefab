@@ -462,6 +462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainTracksWithExit
       objectReference: {fileID: 0}
+    - target: {fileID: 5444307098523789330, guid: 12e63424d04e1144cbbf81d974028e37, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

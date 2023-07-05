@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.6
+  m_fontSize: 13.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1879,7 +1879,7 @@ MonoBehaviour:
   fitType: 4
   rows: 2
   columns: 1
-  cellSize: {x: 185.731, y: 38.27974}
+  cellSize: {x: 179.7628, y: 18.715302}
   spacing: {x: 0, y: 5}
   fitX: 1
   fitY: 1
@@ -3697,7 +3697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09469705, y: 0.23844445}
   m_AnchorMax: {x: 0.92600006, y: 0.2837778}
-  m_AnchoredPosition: {x: -1.0470886, y: -0.5}
+  m_AnchoredPosition: {x: -1.0470886, y: -0.5000305}
   m_SizeDelta: {x: 3.9099, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677269473
@@ -3747,7 +3747,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.15
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5097,7 +5097,7 @@ MonoBehaviour:
   xMax: 0
   zMax: 0
   blockSize: 16
-  Plate: {fileID: 6678604808836388222, guid: bccb615ecfe494745bca222cb70da3c9, type: 3}
+  Plate: {fileID: 7807871151746623841, guid: 7e0087b1e4e099445b0e93a856de7928, type: 3}
   tiles: []
   alreadyPlacedTilesJSON: []
   totalPossiblePoints: 0
@@ -5114,7 +5114,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052933688}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -55.4, y: 0, z: 254.20001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5455,7 +5455,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.3
+  m_fontSize: 13.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5662,7 +5662,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.35
+  m_fontSize: 19.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6823,7 +6823,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.6
+  m_fontSize: 12.25
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7374,7 +7374,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 14.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7955,7 +7955,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.65
+  m_fontSize: 14.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8519,7 +8519,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.9
+  m_fontSize: 9
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8606,7 +8606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27469707, y: 0.18400002}
   m_AnchorMax: {x: 0.4025657, y: 0.22022222}
-  m_AnchoredPosition: {x: -0.5, y: -0.39996338}
+  m_AnchoredPosition: {x: -0.5000076, y: -0.39996338}
   m_SizeDelta: {x: 2.0086975, y: 6.7470093}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999509407
@@ -9409,7 +9409,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.35
+  m_fontSize: 26.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9662,7 +9662,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.25
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

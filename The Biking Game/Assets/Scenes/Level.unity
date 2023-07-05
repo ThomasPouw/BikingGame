@@ -600,7 +600,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.75
+  m_fontSize: 19.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -859,6 +859,7 @@ MonoBehaviour:
     HelperImages: []
     IsCorrect: 0
   DictionaryType: 
+  onVisibleTranslate: 0
 --- !u!114 &195845301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,12 +907,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.9
+  m_fontSize: 63.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 128
+  m_fontSizeMax: 256
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1483,7 +1484,7 @@ MonoBehaviour:
   fitType: 3
   rows: 1
   columns: 4
-  cellSize: {x: 26.958313, y: 29.276947}
+  cellSize: {x: 27.153927, y: 34.474056}
   spacing: {x: 5, y: 0}
   fitX: 1
   fitY: 1
@@ -1572,7 +1573,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 22.4
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1679,8 +1680,11 @@ MonoBehaviour:
   WayPoints: {fileID: 0}
   vehiclePath: {fileID: 0}
   BlockChecker: {fileID: 1610894635}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _wheelMovement: {fileID: 845279793}
-  ready: 1
+  ready: 0
 --- !u!4 &522481742
 Transform:
   m_ObjectHideFlags: 0
@@ -2102,7 +2106,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.45
+  m_fontSize: 27.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2411,6 +2415,7 @@ MonoBehaviour:
     HelperImages: []
     IsCorrect: 0
   DictionaryType: 
+  onVisibleTranslate: 0
 --- !u!1 &699655939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2501,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.65
+  m_fontSize: 23.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2732,7 +2737,7 @@ MonoBehaviour:
   fitType: 3
   rows: 1
   columns: 4
-  cellSize: {x: 69.88005, y: 42.357063}
+  cellSize: {x: 70.32649, y: 52.56076}
   spacing: {x: 5, y: 0}
   fitX: 1
   fitY: 1
@@ -2928,7 +2933,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 22.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3217,7 +3222,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 22.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3793,7 +3798,7 @@ MonoBehaviour:
   fitType: 3
   rows: 1
   columns: 4
-  cellSize: {x: 27.041843, y: 29.276947}
+  cellSize: {x: 27.239399, y: 34.474056}
   spacing: {x: 5, y: 0}
   fitX: 1
   fitY: 1
@@ -4129,7 +4134,7 @@ MonoBehaviour:
   fitType: 3
   rows: 1
   columns: 4
-  cellSize: {x: 26.95937, y: 29.276947}
+  cellSize: {x: 27.154999, y: 34.474056}
   spacing: {x: 5, y: 0}
   fitX: 1
   fitY: 1
@@ -4218,7 +4223,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.45
+  m_fontSize: 27.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4467,6 +4472,7 @@ MonoBehaviour:
   SpinningObject: {fileID: 951082816}
   EverythingLoaded: 0
   animator: {fileID: 1588772682}
+  _bikeOperator: {fileID: 522481738}
 --- !u!1 &1610894634
 GameObject:
   m_ObjectHideFlags: 0
@@ -4659,12 +4665,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 139.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 256
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -4893,7 +4899,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 22.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5531,7 +5537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2232582, y: 0.5853591}
   m_AnchorMax: {x: 0.77000004, y: 1}
-  m_AnchoredPosition: {x: -1, y: 1.558197}
+  m_AnchoredPosition: {x: -1, y: 1.5581665}
   m_SizeDelta: {x: 2.0001001, y: 0.8836994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964406139
@@ -5888,7 +5894,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.45
+  m_fontSize: 27.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6041,7 +6047,7 @@ GameObject:
   - component: {fileID: 8727344948491783695}
   - component: {fileID: 1675058796052094767}
   - component: {fileID: 2424690399708826641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6183,7 +6189,7 @@ GameObject:
   - component: {fileID: 8981807058449149179}
   - component: {fileID: 9145146739168108109}
   - component: {fileID: 7446798182061324527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6326,7 +6332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5574009600220887578}
   - component: {fileID: 5574009600220887579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6459,7 +6465,7 @@ GameObject:
   - component: {fileID: 4035909316842083276}
   - component: {fileID: 4084158128998419840}
   - component: {fileID: 7385680161103833912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Torus.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6482,7 +6488,7 @@ GameObject:
   - component: {fileID: 1233235571304664193}
   - component: {fileID: 58297203930689238}
   - component: {fileID: 2652027849130815753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6500,7 +6506,7 @@ GameObject:
   - component: {fileID: 173439131603793785}
   - component: {fileID: 3658899105067764}
   - component: {fileID: 4364978043856188649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Torus.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

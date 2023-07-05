@@ -121,7 +121,6 @@ public class QuestionController : MonoBehaviour
     }
     IEnumerator LoadAnswer(int i){
         Entry answer = new Translation().TranslateSentence(_blockQuestion.Answers[i].OriginalLine, "Answer");
-        Debug.Log(_blockQuestion.Answers[i].OriginalLine);
         _blockQuestion.Answers[i].SetValue(answer.TranslatedLine, answer.HelperImages);
         Transform P = _answerHolderPanel.transform.GetChild(i);
         P.Find("ButtonToPress").GetChild(0).GetComponent<TMP_Text>().text = (i+1).ToString();

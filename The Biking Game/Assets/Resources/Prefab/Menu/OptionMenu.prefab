@@ -34,10 +34,10 @@ RectTransform:
   m_Father: {fileID: 3745216792045843704}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.46964207, y: 0}
-  m_AnchorMax: {x: 0.65082103, y: 0.2406584}
-  m_AnchoredPosition: {x: 97.130356, y: -54.366745}
-  m_SizeDelta: {x: 180.27306, y: 143.36649}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.5669861, y: -96.7}
+  m_SizeDelta: {x: 2.600006, y: 83.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3664613815758612141
 CanvasRenderer:
@@ -95,10 +95,12 @@ MonoBehaviour:
     m_Top: 5
     m_Bottom: 5
   m_ChildAlignment: 0
+  HideHidden: 0
+  VisibleChildren: []
   fitType: 3
   rows: 2
   columns: 0
-  cellSize: {x: NaN, y: 68.54201}
+  cellSize: {x: NaN, y: 60.025017}
   spacing: {x: 5, y: 5}
   fitX: 1
   fitY: 1
@@ -524,16 +526,16 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 65943339677074780}
   - {fileID: 2984439187541405681}
+  - {fileID: 65943339677074780}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39, y: -59}
-  m_SizeDelta: {x: 223, y: 57.00003}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 334.5, y: -203.69998}
+  m_SizeDelta: {x: 219, y: 57.00003}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &4448469067204599864
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,9 +1000,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 111.5, y: 28.5}
-  m_SizeDelta: {x: 223, y: 57.00003}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1.3496, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4246315008579021878
 CanvasRenderer:
@@ -1070,10 +1072,12 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
+  HideHidden: 0
+  VisibleChildren: []
   fitType: 3
   rows: 1
   columns: 3
-  cellSize: {x: 54.333332, y: 37.00003}
+  cellSize: {x: 53.449863, y: 37.00003}
   spacing: {x: 20, y: 0}
   fitX: 1
   fitY: 1

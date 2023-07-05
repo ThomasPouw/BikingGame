@@ -7,6 +7,7 @@ public class SingleLineTranslation : MonoBehaviour
 {
     public Entry entry;
     public string DictionaryType;
+    public bool onVisibleTranslate;
 
     private TMP_Text _displayText;
     private void OnEnable() {
@@ -14,15 +15,30 @@ public class SingleLineTranslation : MonoBehaviour
     }
     private void Start() {
         if(entry != null){
-           StartCoroutine(new Translation().TranslateSentence(entry.OriginalLine, DictionaryType, (entry)=> {
-            _displayText.text = entry.TranslatedLine;
-           }));
-           //CALLBACK!
-           //_displayText.text = entry.TranslatedLine;
+           translate();
         }
         else
         {
             Debug.LogError("Forgot the Translation! At "+ gameObject.name);
+        }
+    }
+    private void Update() {
+        if(onVisibleTranslate){
+            translate();
+            onVisibleTranslate = false;
+        }
+    }
+    public void translate(){
+        StartCoroutine(new Translation().TranslateSentence(entry.OriginalLine, DictionaryType, (entry)=> {
+            _displayText.text = entry.TranslatedLine;
+           }));
+    }
+    public void switchLanguagetranslate(){
+        if(isActiveAndEnabled){
+            translate();
+        }
+        else{
+            onVisibleTranslate = true;
         }
     }
 }

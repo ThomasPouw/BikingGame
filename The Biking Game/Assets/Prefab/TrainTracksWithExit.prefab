@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 108135025161598380}
   - component: {fileID: 2814673632702874510}
   - component: {fileID: 8692869674418643778}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: TrainTracksWithExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

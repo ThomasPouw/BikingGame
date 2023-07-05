@@ -19,11 +19,7 @@ public class FilePicker : MonoBehaviour
         }
     }
     public void ImageFile(ImageUI imageUI, bool load){
-        string[] filters = new string[2];
-        filters[0] = ".jpg";
-        filters[1] = ".png";
-        filters[1] = ".jpeg";
-        FileBrowser.SetFilters(true, filters);
+        FileBrowser.SetFilters(true, new FileBrowser.Filter("Images", ".jpg", ".png", ".jpeg"));
         FileBrowser.SetDefaultFilter(".png");
         FileBrowser.AddQuickLink( "Users", "C:\\Users", null );
         if(load){
