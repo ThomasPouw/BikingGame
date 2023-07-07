@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class VehicleMovement : MonoBehaviour
 {
@@ -26,10 +27,22 @@ public class VehicleMovement : MonoBehaviour
     {
         try{
             if(ready){
+                //WriteDebugLog.WriteString("Im ready!");
             if (!_navMeshAgent.isActiveAndEnabled){
                 _navMeshAgent.enabled = true;
+                //WriteDebugLog.WriteString("Enabled...");
             }
+            if(!_navMeshAgent.isOnNavMesh){
+                //NavMeshSurface navMeshSurface = GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>();
+                //WriteDebugLog.WriteString("Lets try this...");
+                //navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+                _navMeshAgent.enabled = false;
+                _navMeshAgent.enabled = true;
+            }
+            //WriteDebugLog.WriteString("Im at: "+_navMeshAgent.gameObject.transform.position.ToString());
+            //WriteDebugLog.WriteString("Am I on Navmesh?" + _navMeshAgent.isOnNavMesh);
             if(vehiclePath == null && _navMeshAgent.isOnNavMesh){
+                //WriteDebugLog.WriteString("Looking down...");
                     RaycastHit hit;
                     if(Physics.Raycast(BlockChecker.position, transform.TransformDirection(Vector3.down), out hit, 100f, ~IgnoreLayer)){
                         WayPoints = hit.collider.gameObject;
@@ -72,7 +85,7 @@ public class VehicleMovement : MonoBehaviour
             }
         }
         catch(Exception e){
-            WriteDebugLog.WriteString(e.Message);
+            //WriteDebugLog.WriteString(e.Message);
         }
     }
     private void OnDrawGizmos() {

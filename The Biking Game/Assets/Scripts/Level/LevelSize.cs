@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.AI.Navigation;
 using TMPro;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class LevelSize : MonoBehaviour
 {
@@ -89,7 +91,7 @@ public class LevelSize : MonoBehaviour
         else{
             surfaces.BuildNavMesh();
         }
-        yield return new WaitForSeconds(0.2f);
+        
         if(loadingScreen != null){
             loadingScreen.EverythingLoaded = true;
         }

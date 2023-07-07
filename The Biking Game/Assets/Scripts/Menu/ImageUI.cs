@@ -45,10 +45,11 @@ public class ImageUI : MonoBehaviour
         foreach(string ImageName in _imageNames){
             Debug.Log(ImageName);
             GameObject image = Instantiate(_imageHolder);
-            _imageStorage.DownloadPicture(ImageName, image.transform.GetChild(0).GetComponent<Image>());
+            _imageStorage.DownloadPicture(ImageName, image.transform.GetChild(1).GetComponent<Image>());
+            image.transform.GetChild(0).GetComponent<TMP_Text>().text = 
             image.name = ImageName;
             image.transform.parent = _imagePlacement.transform;
-            image.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => SelectedImage(image));
+            image.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => SelectedImage(image));
             _images.Add(image);
         }
     }
@@ -70,11 +71,11 @@ public class ImageUI : MonoBehaviour
         GameObject image = Instantiate(_imageHolder);
 
         Texture2D texture = new Texture2D(200, 200);
-        StartCoroutine(_imageStorage.SetPicture(texture,imageName, image.transform.GetChild(0).GetComponent<Image>(), imageBytes));
+        StartCoroutine(_imageStorage.SetPicture(texture,imageName, image.transform.GetChild(1).GetComponent<Image>(), imageBytes));
         image.name = imageName;
         image.transform.parent = _imagePlacement.transform;
         ImageUI imageUI = this.GetComponent<ImageUI>();
-        image.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => imageUI.SelectedImage(image));
+        image.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => imageUI.SelectedImage(image));
         _imageNames.Add(imageName);
         _images.Add(image);
 

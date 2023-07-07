@@ -14,12 +14,11 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] GameObject _bikeOperator;
     public void StartBike()
     {
-        NavMeshAgent n = _bikeOperator.GetComponent<NavMeshAgent>();
+        //NavMeshAgent n = _bikeOperator.GetComponent<NavMeshAgent>();
         _bikeOperator.GetComponent<VehicleMovement>().enabled = true;
-        GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().enabled = true;
-        GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = "NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>();
-        WriteDebugLog.WriteString("NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>());
-        //_bikeOperator.GetComponent<NavMeshAgent>().isStopped = false;
+        //GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().enabled = true;
+        //GameObject.Find("PointSystem").transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = "NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>();
+        //WriteDebugLog.WriteString("NavMeshAgent: "+ n.enabled+ " bike on Navmesh"+n.isOnNavMesh + " levelmaker has navdata"+ (GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().navMeshData? true: false) + " NavMeshSurfuce: " +GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>().enabled+ "ActiveSurfuces: "+GameObject.Find("LevelMaker").GetComponent<NavMeshSurface>());
         _bikeOperator.GetComponent<VehicleMovement>().ready = true;
         _bikeOperator.transform.Find("CameraHolder").GetComponent<BikeAudio>().playSound = true;
         gameObject.SetActive(false);

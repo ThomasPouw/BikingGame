@@ -37,7 +37,7 @@ Transform:
   - {fileID: 3756072544804813653}
   - {fileID: 3787334731463922843}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6469337561624799707
 MeshFilter:
@@ -121,9 +121,9 @@ MonoBehaviour:
   - {fileID: 6723076724109831941, guid: 55fda2dcabc6eb44db986d126e7555f9, type: 3}
   - {fileID: 6723076724109831941, guid: e2deb224e60c01b4ca7ebd83cfe52f69, type: 3}
   AllowedWayPoints:
-  - {fileID: 407756859715804503, guid: 08da2df692f4d374aa6d7a414847e736, type: 3}
-  - {fileID: 407756859715804503, guid: 6896175d9e9cfbe4d8b5ab6d6cf0e4d8, type: 3}
-  - {fileID: 407756859715804503, guid: db174b4284e8d6b45b13b8503163cd2b, type: 3}
+  - {fileID: 6194774432470979750, guid: 08da2df692f4d374aa6d7a414847e736, type: 3}
+  - {fileID: 6336644258109908139, guid: 6896175d9e9cfbe4d8b5ab6d6cf0e4d8, type: 3}
+  - {fileID: 3610042347364587035, guid: db174b4284e8d6b45b13b8503163cd2b, type: 3}
 --- !u!64 &388531066105182983
 MeshCollider:
   m_ObjectHideFlags: 0

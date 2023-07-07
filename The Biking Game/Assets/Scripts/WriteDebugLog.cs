@@ -7,14 +7,15 @@ public class WriteDebugLog
 {
     public static void WriteString(string Message)
    {
-       string path = Application.persistentDataPath + "/test.txt";
+        Debug.Log(Application.persistentDataPath);
+       string path = Application.persistentDataPath + "/test2.txt";
        //Write some text to the test.txt file
        StreamWriter writer = new StreamWriter(path, true);
        writer.WriteLine(Message);
         writer.Close();
        StreamReader reader = new StreamReader(path);
        //Print the text from the file
-       Debug.Log(reader.ReadToEnd());
+       //Debug.Log(reader.ReadToEnd());
        reader.Close();
     }
     public static void ReadString()

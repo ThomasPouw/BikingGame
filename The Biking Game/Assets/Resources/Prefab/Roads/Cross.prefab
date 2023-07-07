@@ -130,7 +130,7 @@ Transform:
   - {fileID: 1384775811719839977}
   - {fileID: 8113789535979202265}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3282998574614731337
 MeshFilter:
@@ -208,11 +208,11 @@ MonoBehaviour:
   - {fileID: 1899981520730379976, guid: d3ac44cbeb9b3fe4787ad04b016159a2, type: 3}
   - {fileID: 800137810274989241, guid: 3424b87aef84fa94d8ba2e3a4da1d650, type: 3}
   AllowedWayPoints:
-  - {fileID: 407756859715804503, guid: 08da2df692f4d374aa6d7a414847e736, type: 3}
-  - {fileID: 407756859715804503, guid: 6896175d9e9cfbe4d8b5ab6d6cf0e4d8, type: 3}
-  - {fileID: 407756859715804503, guid: db174b4284e8d6b45b13b8503163cd2b, type: 3}
-  - {fileID: 2209063793997298511, guid: 4555810044c92e047996b80db3d9acc7, type: 3}
-  - {fileID: 8449222449527539004, guid: 42d26e467dd5e2049a8c658a38b7ece0, type: 3}
+  - {fileID: 6194774432470979750, guid: 08da2df692f4d374aa6d7a414847e736, type: 3}
+  - {fileID: 6336644258109908139, guid: 6896175d9e9cfbe4d8b5ab6d6cf0e4d8, type: 3}
+  - {fileID: 3610042347364587035, guid: db174b4284e8d6b45b13b8503163cd2b, type: 3}
+  - {fileID: 4400503664558127543, guid: 4555810044c92e047996b80db3d9acc7, type: 3}
+  - {fileID: 7392930529416595383, guid: 42d26e467dd5e2049a8c658a38b7ece0, type: 3}
 --- !u!114 &8232636662095558959
 MonoBehaviour:
   m_ObjectHideFlags: 0

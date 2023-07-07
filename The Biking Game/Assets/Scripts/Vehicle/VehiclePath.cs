@@ -27,7 +27,7 @@ public class VehiclePath : MonoBehaviour
         if(Waypoints.Count == 0 || Waypoints.Count != AmountofWayPoints+2){
             //Waypoints.Remove(null);
             Waypoints = new List<GameObject>();
-            if(transform.childCount != 2){
+            if(transform.childCount < 2){
                 Debug.LogError("This path does not have enough Waypoints!");
                 return;
             }
